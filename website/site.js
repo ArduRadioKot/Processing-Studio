@@ -29,7 +29,7 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
       observer.unobserve(entry.target);
     }
   }, { threshold: .06 });
-  document.querySelectorAll('.idea-main,.workflow,.device-copy,.device-screen,.android-heading,.android-screen,.android-output,.editor-head,.editor-index,.examples-copy,.examples-screen,.faq-section h2,.faq-list,.download-section').forEach(el => {
+  document.querySelectorAll('.idea-main,.workflow,.device-copy,.device-screen,.android-heading,.android-screen,.android-output,.editor-head,.editor-index,.origin-body,.examples-copy,.examples-screen,.faq-section h2,.faq-list,.download-section').forEach(el => {
     el.classList.add('reveal');
     observer.observe(el);
   });

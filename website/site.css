@@ -121,3 +121,11 @@ p{text-wrap:pretty}
 @media(max-width:840px){.build-heading{grid-template-columns:1fr;gap:28px}.build-heading p{max-width:50ch}}
 @media(max-width:640px){.hero-screen>a{aspect-ratio:1.88}.build-section{padding-top:86px;padding-bottom:98px}.build-heading{margin-bottom:39px}.build-heading h2{font-size:clamp(43px,10vw,58px)}.build-table{min-width:700px;font-size:16px}.build-table th,.build-table td{padding-top:17px;padding-bottom:17px}.build-table tbody th{font-size:20px}.target-compare{grid-template-columns:1fr;gap:28px;margin-top:75px}.target-table tbody th{font-size:19px}.target-table tbody td{font-size:14px}}
 @media(max-width:640px){.build-table-scroll{overflow:visible}.build-table,.build-table tbody,.build-table tr{display:block;min-width:0;width:100%}.build-table thead{display:none}.build-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:19px 0}.build-table th,.build-table td{padding:0;white-space:normal}.build-table tbody th{grid-column:1;grid-row:1;font-size:25px}.build-table tbody td:nth-child(2){grid-column:2;grid-row:1;text-align:right;align-self:center}.build-table tbody td:nth-child(3){grid-column:1;grid-row:2}.build-table tbody td:nth-child(4){grid-column:2;grid-row:2;text-align:right}.build-table tbody td:last-child{grid-column:1 / -1;grid-row:3;text-align:left;padding-top:7px}.build-table a{padding-bottom:3px}}
+
+.origin-section{padding-top:48px;padding-bottom:108px;background:#e8edf7}
+.origin-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:5vw;align-items:end;border-top:2px solid var(--ink);padding-top:60px}
+.origin-body h2{font-size:clamp(52px,5.6vw,94px);line-height:.98;letter-spacing:-.075em;font-weight:800}
+.origin-copy p{font-size:clamp(18px,1.45vw,22px);line-height:1.48;max-width:43ch}
+.origin-copy .under-link{margin-top:32px}
+@media(max-width:840px){.origin-body{grid-template-columns:1fr;gap:30px}.origin-copy p{max-width:58ch}}
+@media(max-width:640px){.origin-section{padding-top:30px;padding-bottom:83px}.origin-body{padding-top:51px;gap:27px}.origin-body h2{font-size:clamp(40px,10.5vw,58px)}.origin-copy p{font-size:18px}.origin-copy .under-link{margin-top:25px}}
