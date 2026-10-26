@@ -28,7 +28,7 @@ p{text-wrap:pretty}
 .hero-aside{padding-bottom:5px}.hero-aside p{font-size:clamp(18px,1.3vw,22px);line-height:1.42;max-width:30ch}
 .primary-link{display:flex;align-items:center;justify-content:space-between;text-decoration:none;background:var(--blue);color:white;font-size:17px;font-weight:700;margin-top:37px;padding:17px 20px;max-width:266px;min-height:57px;transition:background .2s,transform .2s}.primary-link:hover,.download-button:hover{background:#0454c5;transform:translateY(-2px)}.primary-link:active,.download-button:active{transform:translateY(1px)}
 .screen-frame{min-width:0}.screen-frame>a{display:block;cursor:zoom-in}.screen-frame img{width:100%;height:auto;object-fit:contain}.screen-frame figcaption{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.4;letter-spacing:.01em}
-.hero-screen img{aspect-ratio:1600/950}.hero-screen figcaption{padding-top:11px;color:#4d5a5b}
+.hero-screen img{aspect-ratio:1600/950}.hero-screen figcaption{padding-top:11px;color:var(--ink);font-weight:600}
 .hero-footnote{display:flex;justify-content:space-between;gap:16px;padding-top:13px}.hero-footnote a{text-decoration:none;border-bottom:1px solid var(--ink)}
 .idea-section{padding-top:125px;padding-bottom:138px;display:grid;grid-template-columns:minmax(170px,.25fr) minmax(0,.75fr);column-gap:5vw}
 .section-label{text-transform:uppercase;font-weight:700;white-space:nowrap}.label-dot{display:inline-block;width:7px;height:7px;background:var(--blue);border-radius:50%;margin-right:8px;vertical-align:2px}
