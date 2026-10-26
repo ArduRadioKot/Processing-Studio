@@ -1,0 +1,15 @@
+/* Processing Studio — модульные стили */
+@import url('./styles/tokens.css');
+@import url('./styles/base.css');
+@import url('./styles/layout.css');
+@import url('./styles/panels.css');
+@import url('./styles/editor.css');
+@import url('./styles/terminal.css');
+@import url('./styles/notebook.css');
+@import url('./styles/git.css');
+@import url('./styles/settings.css');
+@import url('./styles/palette.css');
+@import url('./styles/device.css');
+@import url('./styles/project.css');
+@import url('./styles/flow.css');
+@import url('./styles/themes.css');

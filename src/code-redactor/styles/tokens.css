@@ -1,0 +1,129 @@
+/* Processing Studio — палитра в духе Android Studio (IntelliJ New UI, тёмная).
+   Плоские панели, тонкие разделители, синий акцент IntelliJ. */
+:root {
+  color-scheme: dark;
+
+  --window-bg: #1e1f22;
+  --card-bg: #2b2d30;
+  --header-bg: #2b2d30;
+  --code-bg: #1e1f22;
+  --editor-bg: #1e1f22;
+  --text-color: #dfe1e5;
+  --text-muted: #9da0a8;
+  --text-faint: #6e6f74;
+  --border-color: #393b40;
+  --hover-color: #2e2f33;
+  --active-bg: #35363a;
+  --accent-color: #548af7;
+  --accent-text: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent-color) 22%, transparent);
+  --link-color: #6fa8ff;
+  --selection: color-mix(in srgb, var(--accent-color) 35%, transparent);
+  --success-color: #6cc48c;
+  --warning-color: #e2b04a;
+  --danger-color: #e5534b;
+  --shadow-color: #00000073;
+  --scrim: #00000099;
+
+  --syn-keyword: #cf8e6d;
+  --syn-string: #6aab73;
+  --syn-number: #2aacb8;
+  --syn-comment: #7a7e85;
+  --syn-function: #56a8f5;
+  --syn-type: #c9c39a;
+  --syn-field: #c77dbb;
+  --syn-tag: #d5b778;
+  --syn-attr: #bcbec4;
+  --syn-heading: #56a8f5;
+  --syn-annotation: #b3ae60;
+
+  /* Плоские углы, как у приборных панелей IntelliJ. */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --gap: 0px;
+  --resizer-w: 5px;
+
+  --ui-font: Inter, 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Text', sans-serif;
+  --mono-font: 'JetBrains Mono', 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Density. Compact UI only swaps these values (see body.compact-ui below). */
+  --font-size: 13px;
+  --row-h: 24px;
+  --bar-h: 36px;
+  --tab-h: 30px;
+  --stripe-w: 40px;
+  --stripe-btn: 36px;
+  --stripe-icon: 18px;
+  --logo: 24px;
+  --head-h: 30px;
+  --status-h: 22px;
+  --ctl-h: 28px;
+  --ctl-h-sm: 26px;
+  --pad: 12px;
+  --pad-sm: 8px;
+  --item-h: 40px;
+  --palette-h: 40px;
+
+  --ui-scale: 1;
+  --editor-zoom: 1;
+  --editor-font-base: 14px;
+  --editor-font-size: 14px;
+  --editor-line-height: 22px;
+  --terminal-height: 240px;
+}
+
+body.light-theme {
+  color-scheme: light;
+  --window-bg: #f2f3f5;
+  --card-bg: #ffffff;
+  --header-bg: #f7f8fa;
+  --code-bg: #ffffff;
+  --editor-bg: #ffffff;
+  --text-color: #1f2328;
+  --text-muted: #6b7078;
+  --text-faint: #9aa0a6;
+  --border-color: #dfe1e5;
+  --hover-color: #eef0f3;
+  --active-bg: #e4e8ee;
+  --link-color: #2b6cd5;
+  --selection: color-mix(in srgb, var(--accent-color) 22%, transparent);
+  --success-color: #2f8a4d;
+  --warning-color: #9e6a03;
+  --danger-color: #c5221f;
+  --shadow-color: #1d233a33;
+  --scrim: #1d233a59;
+
+  --syn-keyword: #0033b3;
+  --syn-string: #067d17;
+  --syn-number: #1750eb;
+  --syn-comment: #8c8c8c;
+  --syn-function: #00627a;
+  --syn-type: #7a5a00;
+  --syn-field: #871094;
+  --syn-tag: #0033b3;
+  --syn-attr: #174ad4;
+  --syn-heading: #0033b3;
+  --syn-annotation: #9e880d;
+}
+
+body.compact-ui {
+  --font-size: 12px;
+  --row-h: 20px;
+  --bar-h: 28px;
+  --tab-h: 26px;
+  --stripe-w: 32px;
+  --stripe-btn: 28px;
+  --stripe-icon: 16px;
+  --logo: 20px;
+  --head-h: 24px;
+  --status-h: 20px;
+  --ctl-h: 24px;
+  --ctl-h-sm: 22px;
+  --pad: 8px;
+  --pad-sm: 6px;
+  --item-h: 30px;
+  --palette-h: 34px;
+}

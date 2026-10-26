@@ -1,0 +1,253 @@
+/* Phone emulator: device panel, phone frame, sensors, console */
+
+.device-side-panel {
+  position: relative; width: 430px; align-self: stretch; display: none;
+  flex-direction: column; flex-shrink: 0;
+}
+.device-resizer {
+  width: var(--resizer-w); margin: 0 calc(-1 * var(--resizer-w)); position: relative; z-index: 2;
+  flex-shrink: 0; align-self: stretch; cursor: col-resize; background: transparent; touch-action: none;
+}
+.device-resizer:hover, .device-resizer.dragging { background: var(--accent-color); }
+body.resizing-panel { user-select: none; cursor: col-resize; }
+
+.device-host {
+  display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; min-height: 0;
+  width: 100%; overflow: hidden; background: var(--editor-bg);
+}
+.device-panel { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────────── */
+.device-toolbar {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 6px 10px; border-bottom: 1px solid var(--border-color);
+  background: var(--header-bg); flex-shrink: 0;
+}
+.device-row { display: flex; align-items: center; gap: 6px; width: 100%; min-width: 0; }
+.device-ico { display: inline-flex; color: var(--text-muted); }
+.device-ico svg { width: 16px; height: 16px; }
+.device-flex { flex: 1 1 auto; }
+.device-select, .device-custom {
+  height: calc(var(--ctl-h-sm) - 2px); padding: 0 8px; font-size: 12px; color: var(--text-color);
+  background: var(--input-bg, var(--card-bg)); border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm); outline: none;
+}
+.device-select { flex: 1 1 auto; min-width: 80px; max-width: 190px; }
+.device-custom { flex: 1 1 auto; min-width: 90px; max-width: 150px; }
+.device-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  height: calc(var(--ctl-h-sm) - 2px); padding: 0 9px; border-radius: var(--radius-sm);
+  font-size: 12px; color: var(--text-color); background: var(--hover-bg);
+  border: 1px solid var(--border-color); white-space: nowrap;
+}
+.device-btn:hover { background: var(--hover-color); }
+.device-btn svg { width: 13px; height: 13px; }
+.device-btn-icon { padding: 0 7px; }
+.device-btn-icon.active { background: var(--accent-color); color: #fff; border-color: transparent; }
+.device-btn-primary { background: var(--accent-color); color: #fff; border-color: transparent; }
+.device-btn-primary:hover { filter: brightness(1.08); background: var(--accent-color); }
+.device-chip {
+  display: inline-flex; align-items: center; height: calc(var(--ctl-h-sm) - 6px); padding: 0 8px;
+  border-radius: 999px; font-size: 11px; color: var(--text-muted); background: var(--hover-bg);
+  white-space: nowrap;
+}
+
+/* ── Body ──────────────────────────────────────────────────────────────────── */
+.device-body { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+.device-stage {
+  position: relative; flex: 1 1 auto; min-width: 0; min-height: 0;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent-color) 7%, transparent), transparent 62%),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--text-faint) 6%, transparent) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--text-faint) 6%, transparent) 0 1px, transparent 1px 28px);
+}
+.device-empty {
+  position: absolute; inset: auto 24px 22px 24px; text-align: center; pointer-events: none;
+  color: var(--text-muted); font-size: 12.5px; line-height: 1.55;
+}
+.device-empty[hidden] { display: none; }
+.device-empty-title { font-size: 14px; font-weight: 600; color: var(--text-color); margin-bottom: 4px; }
+.device-empty-text b { color: var(--link-color); font-weight: 600; }
+
+/* ── Phone ─────────────────────────────────────────────────────────────────── */
+.phone { position: relative; flex-shrink: 0; }
+.phone-inner { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+
+/* Корпус: тёмный металл, тонкая кромка, мягкая тень. */
+.phone-body {
+  position: absolute; left: 50%; top: 50%;
+  border-radius: var(--phone-radius, 46px);
+  padding: var(--phone-bezel, 12px);
+  background:
+    linear-gradient(148deg, #5a5e68 0%, #2c2f36 14%, #191b20 46%, #23262c 72%, #4d515b 100%);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, .55),
+    0 6px 18px rgba(0, 0, 0, .4),
+    0 0 0 1px rgba(255, 255, 255, .10),
+    inset 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+/* Экран с закруглёнными углами и тонкой рамкой. */
+.phone-screen {
+  position: relative; width: 100%; height: 100%;
+  border-radius: calc(var(--phone-radius, 46px) - var(--phone-bezel, 12px));
+  overflow: hidden; background: #000;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .9), inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+.phone-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; display: block; }
+
+/* Блик по стеклу — как у настоящего дисплея. */
+.phone-screen::after {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(128deg, rgba(255, 255, 255, .07) 0%, rgba(255, 255, 255, .02) 26%, transparent 46%);
+}
+
+/* Вырез камеры: Dynamic Island у iPhone, точечная камера у Pixel и Galaxy. */
+.phone-camera {
+  position: absolute; left: 50%; transform: translateX(-50%); top: 10px; z-index: 4; pointer-events: none;
+}
+.phone-camera[hidden] { display: none; }
+.phone-camera-island {
+  width: 106px; height: 28px; border-radius: 999px; background: #05060a;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+}
+.phone-camera-island::after {
+  content: ''; width: 9px; height: 9px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1b2733 0%, #080a0e 70%);
+  box-shadow: inset 0 0 0 1px rgba(120, 160, 220, .22);
+}
+.phone-camera-hole {
+  width: 11px; height: 11px; border-radius: 50%; background: #05060a;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+/* Строка состояния */
+.phone-status {
+  position: absolute; left: 0; right: 0; top: 0; height: 40px; z-index: 3; pointer-events: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 26px 0; font-size: 13px; font-weight: 600; color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
+}
+.phone-status-right { display: inline-flex; align-items: center; gap: 5px; }
+.phone-signal { display: inline-flex; align-items: flex-end; gap: 1.5px; height: 11px; }
+.phone-signal i { display: block; width: 3px; background: #fff; border-radius: 1px; }
+.phone-signal i:nth-child(1) { height: 4px; }
+.phone-signal i:nth-child(2) { height: 6px; }
+.phone-signal i:nth-child(3) { height: 8.5px; }
+.phone-signal i:nth-child(4) { height: 11px; opacity: .35; }
+.phone-wifi {
+  display: inline-block; width: 14px; height: 10px; position: relative;
+}
+.phone-wifi::before, .phone-wifi::after {
+  content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+  border: 1.6px solid #fff; border-bottom-color: transparent; border-radius: 50% 50% 0 0;
+}
+.phone-wifi::before { top: 0; width: 13px; height: 10px; }
+.phone-wifi::after { top: 4px; width: 6px; height: 5px; }
+.phone-battery {
+  display: inline-block; width: 23px; height: 11px; border: 1.4px solid rgba(255, 255, 255, .75);
+  border-radius: 3px; position: relative;
+}
+.phone-battery::after {
+  content: ''; position: absolute; right: -3.5px; top: 3px; width: 2px; height: 5px;
+  background: rgba(255, 255, 255, .75); border-radius: 0 1px 1px 0;
+}
+.phone-battery b { position: absolute; left: 1.5px; top: 1.5px; bottom: 1.5px; width: 70%; background: #fff; border-radius: 1px; }
+
+/* Полоса «домой» */
+.phone-home-bar {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 8px; z-index: 3; pointer-events: none;
+  width: 134px; height: 5px; border-radius: 999px; background: rgba(255, 255, 255, .78);
+  box-shadow: 0 0 6px rgba(0, 0, 0, .35);
+}
+
+/* Боковые кнопки: питание — справа, громкость — слева. */
+.phone-side {
+  position: absolute; width: 3px; border-radius: 2px; z-index: 1; cursor: pointer;
+  background: linear-gradient(90deg, #2b2e35, #55595f 45%, #23262c);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .35);
+}
+.phone-side:hover { background: var(--accent-color); }
+.phone-side-power { right: -3px; top: 30%; width: 3px; height: 84px; }
+.phone-side-back { left: -3px; top: 26%; width: 3px; height: 50px; }
+.phone-side-up { left: -3px; top: 19%; width: 3px; height: 50px; }
+.phone-side-down { left: -3px; top: 33%; width: 3px; height: 50px; }
+
+/* Антенные вставки на корпусе */
+.phone-antenna {
+  position: absolute; right: 0; top: 24%; width: 3px; height: 22px;
+  background: linear-gradient(90deg, #4a4e56, #2a2d33); border-radius: 2px; opacity: .8;
+}
+
+/* Экран заблокирован */
+.phone-lock {
+  position: absolute; inset: 0; z-index: 6; background: #05060a; color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer;
+}
+.phone-lock[hidden] { display: none; }
+.phone-lock-clock { font-size: 58px; font-weight: 300; letter-spacing: -1px; }
+.phone-lock-hint { font-size: 13px; color: rgba(255, 255, 255, .55); }
+
+/* ── Side panel ─────────────────────────────────────────────────────────────── */
+.device-side {
+  width: auto; flex: 0 0 auto; height: 250px; display: flex; flex-direction: column; min-height: 0;
+  border-top: 1px solid var(--border-color); background: var(--card-bg);
+  overflow: hidden; transition: height .16s ease;
+}
+.device-side.collapsed { height: 0; border-top-color: transparent; }
+.device-side-close {
+  width: 22px; height: 22px; border-radius: var(--radius-sm); color: var(--text-muted); font-size: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.device-side-close:hover { background: var(--hover-color); color: var(--text-color); }
+.device-badge-inline { margin-left: 2px; }
+.device-side-tabs { display: flex; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid var(--border-color); }
+.device-side-tab {
+  position: relative; padding: 6px 10px; font-size: 12px; color: var(--text-muted);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0; display: inline-flex; align-items: center; gap: 6px;
+}
+.device-side-tab:hover { color: var(--text-color); }
+.device-side-tab.active { color: var(--text-color); background: var(--hover-bg); }
+.device-badge {
+  min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--danger-color);
+  color: #fff; font-size: 10px; display: inline-flex; align-items: center; justify-content: center;
+}
+.device-badge[hidden] { display: none; }
+.device-side-body { flex: 1 1 auto; min-height: 0; overflow: auto; padding: 12px; }
+.device-side-body[hidden] { display: none; }
+.device-block { margin-bottom: 18px; }
+.device-block-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-faint); margin-bottom: 8px; }
+.device-hint { font-size: 11.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+.device-hint b { color: var(--text-color); }
+.device-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.tilt-pad {
+  position: relative; width: 100%; aspect-ratio: 1 / 1; max-height: 190px; border-radius: var(--radius-md);
+  background: var(--hover-bg); border: 1px solid var(--border-color); cursor: crosshair; touch-action: none;
+  background-image: linear-gradient(color-mix(in srgb, var(--text-faint) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--text-faint) 18%, transparent) 1px, transparent 1px);
+  background-size: 25% 25%; background-position: center;
+}
+.tilt-dot {
+  position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px;
+  border-radius: 50%; background: var(--accent-color); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+.device-slider { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11.5px; color: var(--text-muted); }
+.device-slider span { width: 12px; }
+.device-slider input[type="range"] { flex: 1 1 auto; min-width: 0; accent-color: var(--accent-color); }
+.device-slider output { width: 44px; text-align: right; font-variant-numeric: tabular-nums; color: var(--text-color); }
+
+/* ── Console ────────────────────────────────────────────────────────────────── */
+.device-console {
+  height: 100%; overflow: auto; font-family: var(--editor-font, monospace); font-size: 11.5px;
+  line-height: 1.5; white-space: pre-wrap; word-break: break-word;
+}
+.device-log { padding: 2px 0; border-bottom: 1px solid color-mix(in srgb, var(--border-color) 55%, transparent); }
+.device-log-info { color: var(--text-muted); font-style: italic; }
+.device-log-warn { color: var(--warning-color); }
+.device-log-error { color: var(--danger-color); font-weight: 600; }
+.device-log-trace { color: var(--text-faint); font-size: 11px; }

@@ -1,0 +1,139 @@
+{
+  "name": "processing-studio",
+  "version": "4.4.0",
+  "description": "IDE for Processing: editor, device emulator and Android project export",
+  "main": "main.js",
+  "scripts": {
+    "icons": "node scripts/make-icon.mjs",
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w node-pty",
+    "postinstall": "electron-rebuild -f -w node-pty || true",
+    "prefetch-electron": "node scripts/prefetch-electron.mjs",
+    "prefetch-toolchain": "node scripts/prefetch-toolchain.mjs",
+    "build": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs mac",
+    "build:mac": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs mac",
+    "build:mac:arm64": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs mac-arm64",
+    "build:mac:x64": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs mac-x64",
+    "build:win": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs win",
+    "build:linux": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs linux",
+    "build:all": "node scripts/prefetch-electron.mjs && node scripts/pack.mjs all",
+    "dist": "npm run build"
+  },
+  "keywords": [
+    "electron",
+    "processing",
+    "android",
+    "ide",
+    "pde"
+  ],
+  "author": {
+    "name": "arduradiokot",
+    "email": "frogeesoft.team@gmail.com"
+  },
+  "homepage": "https://github.com/arduradiokot",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^24.6.4"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "axios": "^1.6.0",
+    "marked": "^9.1.6",
+    "node-pty": "^1.1.0"
+  },
+  "build": {
+    "afterSign": "scripts/after-sign.cjs",
+    "appId": "com.arduradiokot.processingstudio",
+    "productName": "Processing Studio",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!vendor/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "vendor/toolchain/${os}-${arch}",
+        "to": "toolchain",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asarUnpack": [
+      "lib/kernel_worker.py"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Development",
+      "maintainer": "arduradiokot <frogeesoft.team@gmail.com>",
+      "icon": "build/icons"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "dmg": {
+      "title": "Processing Studio"
+    }
+  },
+  "allowScripts": {
+    "electron@33.4.11": true,
+    "node-pty": true
+  }
+}

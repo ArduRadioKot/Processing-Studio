@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+.vscode
+.DS_store
+dist/
+src/code-redactor/vendor/toolchain/
+src/code-redactor/dist/
+projects/
+themes/
+toolchain/
+src/legacy
