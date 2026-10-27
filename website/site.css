@@ -129,3 +129,12 @@ p{text-wrap:pretty}
 .origin-copy .under-link{margin-top:32px}
 @media(max-width:840px){.origin-body{grid-template-columns:1fr;gap:30px}.origin-copy p{max-width:58ch}}
 @media(max-width:640px){.origin-section{padding-top:30px;padding-bottom:83px}.origin-body{padding-top:51px;gap:27px}.origin-body h2{font-size:clamp(40px,10.5vw,58px)}.origin-copy p{font-size:18px}.origin-copy .under-link{margin-top:25px}}
+
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.icon{display:inline-block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.16em;flex:none}
+.header-download .icon{color:var(--blue);margin-left:10px}
+.menu-toggle .icon{color:var(--blue);width:20px;height:20px;margin-left:8px;vertical-align:-.3em;transition:transform .2s}
+.menu-toggle[aria-expanded="true"] .icon{transform:rotate(45deg)}
+.primary-link .icon,.download-button .icon{width:20px;height:20px}
+.footer-brand .icon{width:.64em;height:.64em;vertical-align:-.02em;stroke-width:2.2}
+.screen-frame figcaption .icon{width:.83em;height:.83em;vertical-align:-.1em}
