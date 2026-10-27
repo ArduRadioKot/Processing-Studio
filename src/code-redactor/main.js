@@ -23,6 +23,7 @@ const { registerToolchainIpc } = require('./lib/toolchain');
 const { registerToolchainInstallIpc } = require('./lib/toolchain-install');
 const { registerCapacitorIpc } = require('./lib/capacitor-install');
 const { registerBuilderIpc } = require('./lib/builder');
+const { registerUpdaterIpc } = require('./lib/updater');
 
 // `npm start` and the installed app share the name, so they would share one profile. A second process on the same profile
 // waits for the first one's storage lock: every start took ~4 s (the page blocks on its first localStorage read).
@@ -74,7 +75,7 @@ function buildMacMenu() {
   const item = (label, id, accelerator) => ({ label, click: send(id), ...(accelerator ? { accelerator, registerAccelerator: false } : {}) });
   const sep = { type: 'separator' };
   return Menu.buildFromTemplate([
-    { label: app.getName(), submenu: [{ role: 'about', label: 'О программе ' + app.getName() }, sep, item('Настройки…', 'settings', 'Cmd+,'), sep, { role: 'hide', label: 'Скрыть' }, { role: 'hideOthers', label: 'Скрыть остальные' }, { role: 'unhide', label: 'Показать все' }, sep, { role: 'quit', label: 'Выйти' }] },
+    { label: app.getName(), submenu: [{ role: 'about', label: 'О программе ' + app.getName() }, sep, item('Настройки…', 'settings', 'Cmd+,'), item('Проверить обновления…', 'updates'), sep, { role: 'hide', label: 'Скрыть' }, { role: 'hideOthers', label: 'Скрыть остальные' }, { role: 'unhide', label: 'Показать все' }, sep, { role: 'quit', label: 'Выйти' }] },
     { label: 'Файл', submenu: [
       { label: 'Новое окно', click: () => createWindow(true), accelerator: 'Shift+Cmd+N', registerAccelerator: false },
       item('Новый файл', 'new-file', 'Cmd+N'), item('Новый ноутбук', 'new-notebook'), sep,
@@ -173,6 +174,7 @@ function registerAllIpc() {
   registerCapacitorIpc();
   registerToolchainInstallIpc();
   registerBuilderIpc();
+  registerUpdaterIpc(ipcMain, { app, BrowserWindow, shell });
 }
 
 // Terminal + git must be available as soon as the app is ready

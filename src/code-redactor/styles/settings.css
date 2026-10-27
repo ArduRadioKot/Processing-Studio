@@ -159,3 +159,23 @@
 .rc-foot button.primary { background: var(--accent-color); color: var(--accent-text); }
 .rc-foot button.primary:hover { background: color-mix(in srgb, var(--accent-color) 86%, #fff); }
 .rc-check input { accent-color: var(--accent-color); }
+
+/* GitHub Releases update controls */
+.updates-product { display: flex; align-items: center; gap: 12px; margin: 16px 0 18px; }
+.updates-product img { width: 48px; height: 48px; object-fit: contain; }
+.updates-product div { display: flex; flex-direction: column; gap: 3px; }
+.updates-product strong { font-size: 16px; font-weight: 600; }
+.updates-product span { color: var(--text-muted); font-size: 12px; }
+.updates-status { margin: 0 0 12px; font-size: 13px; color: var(--text-color); }
+.updates-notes { max-height: 180px; overflow: auto; margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--code-bg); color: var(--text-muted); white-space: pre-wrap; font-size: 12px; line-height: 1.5; }
+.updates-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.updates-actions .settings-btn { min-height: var(--ctl-h-sm); height: auto; padding: 7px 12px; }
+.updates-actions .settings-btn[hidden], .updates-notes[hidden] { display: none; }
+.updates-banner { flex-shrink: 0; display: flex; align-items: center; gap: 8px; min-height: 42px; padding: 6px 13px; background: var(--accent-soft); color: var(--text-color); border-top: 1px solid var(--border-color); font-size: 12px; }
+.updates-banner[hidden] { display: none; }
+.updates-banner-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.updates-banner button { flex: none; padding: 5px 9px; border-radius: var(--radius-sm); color: var(--text-color); font-size: 12px; }
+.updates-banner button:hover { background: var(--hover-color); }
+.updates-banner .updates-banner-go { background: var(--accent-color); color: var(--accent-text); font-weight: 600; }
+.updates-banner .updates-banner-go:hover { background: color-mix(in srgb, var(--accent-color) 86%, #fff); }
+.updates-banner .updates-banner-close { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; }

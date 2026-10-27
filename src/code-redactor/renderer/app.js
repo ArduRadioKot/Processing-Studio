@@ -90,6 +90,7 @@ import { setupAutoIndentSetting } from './smart-edit.js';
 import { setupThemeControls } from './themes.js';
 import { reopenClosedTab } from './tabs.js';
 import { openToolchainWizard } from './toolchain-wizard.js';
+import { setupUpdater } from './updater.js';
 
 const dom = getDom();
 
@@ -321,6 +322,7 @@ export function setupEventListeners() {
   setupTabsBarDrop();
   setupSplitUi();
   setupSettingsTabs();
+  setupUpdater();
   document.getElementById('open-toolchain-wizard')?.addEventListener('click', () => {
     if (dom.settingsModal) dom.settingsModal.style.display = 'none';
     openToolchainWizard();

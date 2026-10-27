@@ -393,6 +393,12 @@
 
     </div>
     </div><!-- /workspace -->
+  <div class="updates-banner" id="updates-banner" role="status" hidden>
+    <span class="updates-banner-text"></span>
+    <button type="button" class="updates-banner-go">Обновить</button>
+    <button type="button" class="updates-banner-details">Подробнее</button>
+    <button type="button" class="updates-banner-close" aria-label="Скрыть уведомление об обновлении"></button>
+  </div>
   <div id="status-bar" class="status-bar app-chrome">
     <div class="status-left">
       <span id="status-file">Welcome</span>
@@ -424,6 +430,7 @@
       <button type="button" class="settings-nav-btn" data-settings-tab="background" hidden>Фон</button>
       <button type="button" class="settings-nav-btn" data-settings-tab="ai">AI</button>
       <button type="button" class="settings-nav-btn" data-settings-tab="toolchain">Сборка</button>
+      <button type="button" class="settings-nav-btn" data-settings-tab="updates">Обновления</button>
       <button type="button" class="settings-nav-btn" data-settings-tab="shortcuts">Горячие клавиши</button>
     </nav>
     <div class="settings-main">
@@ -945,6 +952,22 @@
               <button type="button" class="settings-btn" id="open-toolchain-wizard">Открыть</button>
             </div>
           </div>
+        </section>
+
+        <section class="settings-panel" id="settings-panel-updates">
+          <h3 class="settings-panel-title">Обновления</h3>
+          <div class="updates-product">
+            <img src="images/icon.png" width="48" height="48" alt="">
+            <div><strong>Processing Studio</strong><span id="updates-version">Текущая версия</span></div>
+          </div>
+          <p class="updates-status" id="updates-status" role="status" aria-live="polite">Проверка обновлений доступна через GitHub Releases.</p>
+          <p class="updates-notes" id="updates-notes" hidden></p>
+          <div class="updates-actions">
+            <button type="button" class="settings-btn" id="updates-check">Проверить обновления</button>
+            <button type="button" class="settings-btn" id="updates-action" hidden>Скачать и установить</button>
+            <button type="button" class="settings-btn ghost" id="updates-release">Все релизы на GitHub</button>
+          </div>
+          <p class="settings-hint">Обновление скачивается с GitHub для вашей системы. Перед установкой сохраните открытые файлы. Для Linux DEB установка выполняется вручную.</p>
         </section>
 
         <section class="settings-panel" id="settings-panel-shortcuts">
