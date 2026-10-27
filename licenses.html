@@ -11,13 +11,19 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="icon-arrow-out" viewBox="0 0 24 24"><path d="M5 19 19 5M8 5h11v11"/></symbol>
+    <symbol id="icon-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-7-7 7 7 7-7"/></symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-7 7 7-7 7 7"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
   <a class="skip-link" href="#main">К содержимому</a>
   <header class="legal-header page-grid">
     <a class="identity" href="index.html" aria-label="Processing Studio, на главную">
       <img src="img/icon.png" width="50" height="50" alt="">
       <span>Processing<br>Studio</span>
     </a>
-    <a class="legal-back" href="index.html">На главную ↗</a>
+    <a class="legal-back" href="index.html">На главную <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a>
   </header>
   <main class="legal-main page-grid" id="main">
     <h1>Лицензии.</h1>
@@ -44,6 +50,6 @@
       <div class="legal-copy"><p>Логотип и снимки интерфейса используются как материалы Processing Studio. Отдельные условия их повторного использования вне проекта не опубликованы.</p></div>
     </section>
   </main>
-  <footer class="site-footer page-grid legal-footer"><a class="footer-brand" href="index.html">Processing Studio ↑</a><p>IDE для мобильной разработки на Processing.</p><nav aria-label="Ссылки проекта"><a href="index.html">Главная</a><a href="LICENSE.txt">GPL 2.0</a><a href="https://github.com/ArduRadioKot/Processing-Studio" target="_blank" rel="noopener noreferrer">Исходный код</a></nav><small>© 2026 FrogeeSoft</small></footer>
+  <footer class="site-footer page-grid legal-footer"><a class="footer-brand" href="index.html">Processing Studio <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-up"/></svg></a><p>IDE для мобильной разработки на Processing.</p><nav aria-label="Ссылки проекта"><a href="index.html">Главная</a><a href="LICENSE.txt">GPL 2.0</a><a href="https://github.com/ArduRadioKot/Processing-Studio" target="_blank" rel="noopener noreferrer">Исходный код</a></nav><small>© 2026 FrogeeSoft</small></footer>
 </body>
 </html>
