@@ -84,7 +84,7 @@ export function renderPreview() {
 
 export function isPreviewOpen() { return !!rightPreview(); }
 
-/** Opens the preview of the current Markdown file as its own tab beside the editor; again — closes it. */
+/** Opens the preview of the current Markdown file as its own tab beside the editor; again - closes it. */
 export function toggleMarkdownPreview(force) {
   const source = state.currentTabs[state.activeTabIndex];
   if (!isMarkdownTab(source)) return;

@@ -173,4 +173,4 @@ for (const [file, names] of Object.entries(MODULE_FUNCS)) {
   fs.writeFileSync(path.join(outDir, file + '.part'), chunks.join('\n\n'));
 }
 
-console.log('Extracted parts to renderer/*.part — run assemble step');
+console.log('Extracted parts to renderer/*.part - run assemble step');

@@ -1,4 +1,4 @@
-/** Late-bound config saver — breaks appearance/editor/tabs ↔ config-io cycles */
+/** Late-bound config saver - breaks appearance/editor/tabs ↔ config-io cycles */
 let _saveAllConfig = async () => {};
 
 export function setConfigSaver(fn) {

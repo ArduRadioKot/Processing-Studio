@@ -155,11 +155,11 @@ function settingsForm(settings, { title, submit, pickKind = false }) {
         </div>
         <div class="ps-field">
           <label>Папка проекта</label>
-          <div class="ps-hint" id="ps-target-dir">—</div>
+          <div class="ps-hint" id="ps-target-dir">-</div>
         </div>
         <label class="ps-check ps-lib" data-android-only>
           <input type="checkbox" id="ps-adaptive-ui" ${settings.adaptiveUi !== false ? 'checked' : ''}>
-          <span>Adaptive UI — масштабировать любой интерфейс под экран</span>
+          <span>Adaptive UI - масштабировать любой интерфейс под экран</span>
         </label>
         <div class="ps-hint" data-android-only>Библиотека AdaptiveUI вписывает скетч из size() в любой телефон: кнопки, текст и касания масштабируются сами.</div>
       </div>

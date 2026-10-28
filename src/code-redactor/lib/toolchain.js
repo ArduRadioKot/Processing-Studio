@@ -17,7 +17,7 @@ function isWinScript(cmd) {
   return WIN && /\.(cmd|bat)$/i.test(String(cmd || ''));
 }
 
-/** CMD считает `;` разделителем команд — без кавычек sdkmanager не видит platforms;android-34. */
+/** CMD считает `;` разделителем команд - без кавычек sdkmanager не видит platforms;android-34. */
 function quoteWinArg(arg) {
   const s = String(arg);
   if (s.length === 0) return '""';
@@ -157,7 +157,7 @@ function firstLine(text) {
   return String(text || '').split(/\r?\n/).map((l) => l.trim()).find(Boolean) || '';
 }
 
-/** 66 = Java 22. Gradle 8.7 и AGP 8.5 понимают только 17–21. */
+/** 66 = Java 22. Gradle 8.7 и AGP 8.5 понимают только 17-21. */
 function parseJavaMajor(text) {
   const match = String(text || '').match(/version "(\d+)(?:\.(\d+))?/);
   if (!match) return 0;
@@ -240,7 +240,7 @@ function listJvmHomes() {
   return [...new Set(homes)];
 }
 
-/** Синхронно выбирает JDK 17–21 по пути. Java 22+ (class file 66) отсекается. */
+/** Синхронно выбирает JDK 17-21 по пути. Java 22+ (class file 66) отсекается. */
 function preferredJdkHome() {
   const m = managedPaths();
   if (exists(path.join(m.javaHome, 'bin', `java${EXE}`))) return m.javaHome;

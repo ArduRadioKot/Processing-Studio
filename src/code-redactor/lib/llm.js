@@ -1,7 +1,7 @@
 /**
  * Streaming chat adapters. Every provider reports the same events:
- *   onDelta(text)      — a piece of the visible answer
- *   onThinking(text)   — a piece of the model's reasoning (kept apart from the answer)
+ *   onDelta(text)      - a piece of the visible answer
+ *   onThinking(text)   - a piece of the model's reasoning (kept apart from the answer)
  * Network chunks do not respect line boundaries, so lines are re-assembled in a buffer before parsing.
  */
 const axios = require('axios');

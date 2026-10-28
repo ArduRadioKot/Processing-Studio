@@ -56,7 +56,7 @@ export function createProcessingRuntime(options) {
     rotation: 0, orientation: 'portrait', heading: 0,
     lat: 0, lon: 0, alt: 0, accuracy: 0,
     permissions: Object.assign({}, opts.permissions || {}),
-    orientationLock: 0,        // 0 — не зафиксирована
+    orientationLock: 0,        // 0 - не зафиксирована
     keyboard: false,
     paused: false,
     light: 320,
@@ -332,7 +332,7 @@ export function createProcessingRuntime(options) {
   };
 
   /**
-   * В Processing key — это char, поэтому сравнения работают и с буквой ('a'),
+   * В Processing key - это char, поэтому сравнения работают и с буквой ('a'),
    * и с её кодом (97). В JS тот же объект сравнивается с обоими.
    */
   const makeChar = (ch) => {
@@ -515,7 +515,7 @@ export function createProcessingRuntime(options) {
     size(w, h, renderer) {
       if (renderer !== undefined && renderer !== null && renderer !== API.P2D && renderer !== API.FX2D) {
         const name = renderer === API.P3D || renderer === API.WEBGL ? 'P3D/WEBGL' : String(renderer);
-        post({ type: 'log', level: 'warn', text: `Рендерер ${name} не поддерживается — рисуем в 2D (P2D).` });
+        post({ type: 'log', level: 'warn', text: `Рендерер ${name} не поддерживается - рисуем в 2D (P2D).` });
       }
       S.sketchW = Math.max(1, Math.round(w));
       S.sketchH = Math.max(1, Math.round(h));
@@ -734,8 +734,8 @@ export function createProcessingRuntime(options) {
     getContext() { return CONTEXT; },
     getPreferences() { return PREFS; },
     /**
-     * requestPermission("android.permission.CAMERA") — вызовет onPermissionGranted(name, granted).
-     * requestPermission("android.permission.CAMERA", "onCameraPermission") — вызовет метод с boolean.
+     * requestPermission("android.permission.CAMERA") - вызовет onPermissionGranted(name, granted).
+     * requestPermission("android.permission.CAMERA", "onCameraPermission") - вызовет метод с boolean.
      */
     requestPermission(permission, callback) {
       const name = String(permission);
@@ -1041,7 +1041,7 @@ export function createProcessingRuntime(options) {
       }
     }
     applySize();
-    // displayDensity/frameRate — и число, и функция: `56 * displayDensity` и `displayDensity()`.
+    // displayDensity/frameRate - и число, и функция: `56 * displayDensity` и `displayDensity()`.
     for (const key of ['displayDensity', 'frameRate']) {
       if (typeof W[key] === 'function') {
         W[key].valueOf = () => (key === 'displayDensity' ? S.dpr : S.fpsValue);

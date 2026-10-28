@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f2f3ef">
+  <script>try{const saved=localStorage.getItem('processing-studio-theme');document.documentElement.dataset.theme=saved==='dark'||saved==='light'?saved:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch{document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}</script>
   <meta name="description" content="Лицензии Processing Studio, сайта и основных библиотек приложения.">
   <title>Лицензии | Processing Studio</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="img/icon.png" type="image/png">
   <link rel="stylesheet" href="site.css">
+  <script defer src="i18n.js"></script>
+  <script defer src="site.js"></script>
 </head>
 <body>
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -16,6 +19,8 @@
     <symbol id="icon-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-7-7 7 7 7-7"/></symbol>
     <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-7 7 7-7 7 7"/></symbol>
     <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
   </svg>
   <a class="skip-link" href="#main">К содержимому</a>
   <header class="legal-header page-grid">
@@ -23,7 +28,7 @@
       <img src="img/icon.png" width="50" height="50" alt="">
       <span>Processing<br>Studio</span>
     </a>
-    <a class="legal-back" href="index.html">На главную <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a>
+    <div class="legal-actions"><div class="language-switch" role="group" aria-label="Язык сайта"><button type="button" data-site-lang="ru" lang="ru">RU</button><span aria-hidden="true">/</span><button type="button" data-site-lang="en" lang="en">EN</button></div><button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false"><svg class="icon theme-icon-moon" aria-hidden="true" focusable="false"><use href="#icon-moon"/></svg><svg class="icon theme-icon-sun" aria-hidden="true" focusable="false"><use href="#icon-sun"/></svg><span class="theme-toggle-label">Тёмная тема</span></button><a class="legal-back" href="index.html">На главную <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a></div>
   </header>
   <main class="legal-main page-grid" id="main">
     <h1>Лицензии.</h1>

@@ -77,6 +77,7 @@ p{text-wrap:pretty}
 
 .android-output h3{font-size:22px;letter-spacing:-.035em}
 .site-footer small{font-size:13px}
+.language-switch{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;letter-spacing:.02em}.language-switch button{border:0;padding:6px 2px;background:none;color:var(--muted);cursor:pointer;font-size:inherit;font-weight:inherit}.language-switch button[aria-pressed="true"]{color:var(--ink)}.language-switch button:hover{color:var(--blue)}.language-switch span{color:var(--line)}
 @media(max-width:640px){.hero-heading{padding-top:82px}.workflow>div,.workflow>div+div{border-top:2px solid var(--line)}.workflow>div:first-child{border-top:0}}
 .editor-index>div{grid-template-columns:1fr;gap:12px}
 .legal-header{min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:20px}
@@ -138,3 +139,49 @@ p{text-wrap:pretty}
 .primary-link .icon,.download-button .icon{width:20px;height:20px}
 .footer-brand .icon{width:.64em;height:.64em;vertical-align:-.02em;stroke-width:2.2}
 .screen-frame figcaption .icon{width:.83em;height:.83em;vertical-align:-.1em}
+
+/* Theme controls share the site's plain text navigation. */
+:root{color-scheme:light}
+.header-actions,.legal-actions{display:flex;align-items:center;justify-self:end;gap:clamp(18px,2vw,32px)}
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px 0;border:0;background:none;color:var(--ink);font-size:13px;font-weight:700;white-space:nowrap;cursor:pointer}
+.theme-toggle:hover{color:var(--blue)}
+.theme-toggle .icon{width:17px;height:17px}
+.theme-icon-sun{display:none}
+:root[data-theme="dark"] .theme-icon-moon{display:none}
+:root[data-theme="dark"] .theme-icon-sun{display:inline-block}
+@media(max-width:840px){.header-actions{gap:20px}}
+@media(max-width:640px){.theme-toggle-label{display:none}.theme-toggle .icon{width:20px;height:20px}.legal-actions{gap:19px}}
+
+/* Dark palette keeps the same typography, spacing and unframed screenshots. */
+:root[data-theme="dark"]{color-scheme:dark;--paper:#101719;--ink:#eef4f1;--muted:#b9cac5;--line:#53635f;--blue:#79adff;--dark:#0b1113;--dark-ink:#eef4f1}
+:root[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+:root[data-theme="dark"] .skip-link{color:#101719}
+:root[data-theme="dark"] .workflow p,
+:root[data-theme="dark"] .editor-index p,
+:root[data-theme="dark"] .faq-list p,
+:root[data-theme="dark"] .target-compare p{color:var(--muted)}
+:root[data-theme="dark"] .device-section{background:#1a282a}
+:root[data-theme="dark"] .device-copy .section-label,
+:root[data-theme="dark"] .device-spec span,
+:root[data-theme="dark"] .device-screen figcaption{color:#a4d2c5}
+:root[data-theme="dark"] .device-copy>p,
+:root[data-theme="dark"] .device-spec p{color:#d2e0da}
+:root[data-theme="dark"] .device-spec{border-color:#5c7771}
+:root[data-theme="dark"] .android-section{background:#183035}
+:root[data-theme="dark"] .android-screen figcaption,
+:root[data-theme="dark"] .android-output p{color:#d1e3dd}
+:root[data-theme="dark"] .examples-section{background:#1b2b27}
+:root[data-theme="dark"] .examples-screen figcaption{color:#c9dfd5}
+:root[data-theme="dark"] .origin-section{background:#1d2938}
+:root[data-theme="dark"] .hero-screen figcaption{color:var(--ink)}
+:root[data-theme="dark"] .build-table thead th,
+:root[data-theme="dark"] .target-table thead th{color:var(--muted)}
+:root[data-theme="dark"] .build-table a{color:#9cc4ff;border-color:#9cc4ff}
+:root[data-theme="dark"] .build-table a:hover{color:var(--ink);border-color:var(--ink)}
+:root[data-theme="dark"] .download-section{background:#0759d1;color:#fff}
+:root[data-theme="dark"] .download-button{background:#101c29;color:#fff}
+:root[data-theme="dark"] .download-button:hover{background:#183047}
+:root[data-theme="dark"] .primary-link{background:#146deb;color:#fff}
+:root[data-theme="dark"] .primary-link:hover{background:#0d58c4}
+:root[data-theme="dark"] .site-footer{color:#d5e0db}
+:root[data-theme="dark"] .site-footer small{color:#a9bbb4}

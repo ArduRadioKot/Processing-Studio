@@ -160,7 +160,7 @@
                 </div>
                 <div class="action-text">
                   <div class="action-title">Установщик сборки…</div>
-                  <div class="action-description">JDK 17, Android SDK, Gradle и Node — всё для APK</div>
+                  <div class="action-description">JDK 17, Android SDK, Gradle и Node - всё для APK</div>
                 </div>
               </div>
 
@@ -289,7 +289,7 @@
     </div>
 
     <!-- Панель чата (скрыта по умолчанию) -->
-    <div id="chat-resizer" class="chat-resizer" style="display:none;" title="Потяните, чтобы изменить ширину. Двойной щелчок — по умолчанию."></div>
+    <div id="chat-resizer" class="chat-resizer" style="display:none;" title="Потяните, чтобы изменить ширину. Двойной щелчок - по умолчанию."></div>
     <div id="chat-panel" class="chat-panel panel-bubble" style="display:none;">
       <div class="chat-header">
         <div class="chat-header-left">
@@ -362,7 +362,7 @@
     </div>
 
     <!-- Панель эмулятора устройства (справа, скрыта по умолчанию) -->
-    <div id="device-resizer" class="device-resizer" style="display:none;" title="Потяните, чтобы изменить ширину. Двойной щелчок — по умолчанию."></div>
+    <div id="device-resizer" class="device-resizer" style="display:none;" title="Потяните, чтобы изменить ширину. Двойной щелчок - по умолчанию."></div>
     <div id="device-panel" class="device-side-panel panel-bubble" style="display:none;">
       <div id="device-host" class="device-host"></div>
     </div>
@@ -398,6 +398,19 @@
     <button type="button" class="updates-banner-go">Обновить</button>
     <button type="button" class="updates-banner-details">Подробнее</button>
     <button type="button" class="updates-banner-close" aria-label="Скрыть уведомление об обновлении"></button>
+  </div>
+  <div class="modal-overlay" id="modal-update-found" role="dialog" aria-modal="true" aria-labelledby="update-found-title" style="display:none">
+    <div class="modal-window update-found-window">
+      <img src="images/icon.png" width="52" height="52" alt="">
+      <h2 id="update-found-title">Доступно обновление</h2>
+      <p id="update-found-version"></p>
+      <p id="update-found-notes" hidden></p>
+      <div class="update-found-actions">
+        <button type="button" class="settings-btn ghost" id="update-found-later">Позже</button>
+        <button type="button" class="settings-btn ghost" id="update-found-details">Подробнее</button>
+        <button type="button" class="settings-btn" id="update-found-install">Обновить</button>
+      </div>
+    </div>
   </div>
   <div id="status-bar" class="status-bar app-chrome">
     <div class="status-left">
@@ -446,6 +459,10 @@
       <div class="modal-body settings-body">
         <section class="settings-panel active" id="settings-panel-editor">
           <h3 class="settings-panel-title">Редактор</h3>
+          <div class="settings-item">
+            <label class="settings-label" for="interface-language">Язык интерфейса</label>
+            <div class="settings-control"><select id="interface-language" class="settings-select"><option value="ru">Русский</option><option value="en">English</option></select></div>
+          </div>
           <div class="settings-item">
             <label class="settings-label" for="font-size-select">Размер шрифта</label>
             <div class="settings-control">
@@ -775,7 +792,7 @@
               <span id="bg-image-opacity-value" class="settings-value">0%</span>
             </div>
           </div>
-          <p class="settings-hint">Диапазон прозрачности UI: 0.4–1. URL изображения необязателен; для CSS используйте формат <code>url(...)</code>.</p>
+          <p class="settings-hint">Диапазон прозрачности UI: 0.4-1. URL изображения необязателен; для CSS используйте формат <code>url(...)</code>.</p>
         </section>
 
         <section class="settings-panel" id="settings-panel-ai">
@@ -945,7 +962,7 @@
 
         <section class="settings-panel" id="settings-panel-toolchain">
           <h3 class="settings-panel-title">Сборка</h3>
-          <p class="settings-hint">Установщик приложения (DMG / NSIS / AppImage) упаковывает JDK 17, Android SDK 34, Gradle и Node. При первом запуске они ставятся в <code>Documents/ProcessingStudio/toolchain</code>. Если архивов в пакете нет — установщик скачает их сам.</p>
+          <p class="settings-hint">Установщик приложения (DMG / NSIS / AppImage) упаковывает JDK 17, Android SDK 34, Gradle и Node. При первом запуске они ставятся в <code>Documents/ProcessingStudio/toolchain</code>. Если архивов в пакете нет - установщик скачает их сам.</p>
           <div class="settings-item">
             <label class="settings-label">Установщик сборки</label>
             <div class="settings-control">
@@ -1015,6 +1032,7 @@
   <script src="liquid-glass/presets.js"></script>
   <script src="liquid-glass/displacement.js"></script>
   <script src="liquid-glass/liquid-glass.js"></script>
+  <script defer src="i18n.js"></script>
   <script type="module" src="renderer/app.js"></script>
 </body>
 </html> 

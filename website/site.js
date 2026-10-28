@@ -1,25 +1,52 @@
 const menuButton = document.querySelector('.menu-toggle');
 const mobileNav = document.querySelector('.mobile-nav');
+const themeButtons = document.querySelectorAll('.theme-toggle');
+const themeMedia = matchMedia('(prefers-color-scheme: dark)');
+const themeKey = 'processing-studio-theme';
+const english = document.documentElement.lang === 'en';
 
-function closeMenu() {
-  mobileNav.hidden = true;
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Открыть меню');
+function setTheme(theme) {
+  const dark = theme === 'dark';
+  document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#101719' : '#f2f3ef');
+  themeButtons.forEach(button => {
+    button.setAttribute('aria-pressed', String(dark));
+    button.setAttribute('aria-label', dark ? (english ? 'Use light theme' : 'Включить светлую тему') : (english ? 'Use dark theme' : 'Включить тёмную тему'));
+    button.querySelector('.theme-toggle-label').textContent = dark ? (english ? 'Light theme' : 'Светлая тема') : (english ? 'Dark theme' : 'Тёмная тема');
+  });
 }
 
-menuButton.addEventListener('click', () => {
+setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+themeButtons.forEach(button => button.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  setTheme(next);
+  try { localStorage.setItem(themeKey, next); } catch {}
+}));
+themeMedia.addEventListener?.('change', event => {
+  try { if (localStorage.getItem(themeKey)) return; } catch { return; }
+  setTheme(event.matches ? 'dark' : 'light');
+});
+
+function closeMenu() {
+  if (!menuButton || !mobileNav) return;
+  mobileNav.hidden = true;
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', english ? 'Open menu' : 'Открыть меню');
+}
+
+menuButton?.addEventListener('click', () => {
   const open = mobileNav.hidden;
   mobileNav.hidden = !open;
   menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  menuButton.setAttribute('aria-label', open ? (english ? 'Close menu' : 'Закрыть меню') : (english ? 'Open menu' : 'Открыть меню'));
 });
-mobileNav.addEventListener('click', event => {
+mobileNav?.addEventListener('click', event => {
   if (event.target.closest('a')) closeMenu();
 });
 window.addEventListener('resize', () => {
   if (innerWidth > 840) closeMenu();
 });
-document.getElementById('year').textContent = new Date().getFullYear();
+if (document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
 
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const observer = new IntersectionObserver(entries => {

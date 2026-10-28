@@ -95,7 +95,7 @@ import { setupUpdater } from './updater.js';
 const dom = getDom();
 
 export function setupEventListeners() {
-  // Настройки и терминал — раньше остального, чтобы UI не «умирал» из‑за ошибок ниже
+  // Настройки и терминал - раньше остального, чтобы UI не «умирал» из‑за ошибок ниже
   if (dom.settingsBtn && dom.settingsModal) {
     dom.settingsBtn.addEventListener('click', () => {
       dom.settingsModal.style.display = 'flex';
@@ -126,7 +126,7 @@ export function setupEventListeners() {
     dom.newTabBtn.addEventListener('click', createNewTab);
   }
   
-  // Кнопки файлов (стартовая страница / меню). Кнопки проводника — через setupExplorerActions:
+  // Кнопки файлов (стартовая страница / меню). Кнопки проводника - через setupExplorerActions:
   // их DOM пересобирается, а window.prompt в Electron не работает.
   if (dom.newFileBtn) {
     dom.newFileBtn.addEventListener('click', createNewFile);
@@ -458,7 +458,7 @@ export function handleGlobalKeydown(e) {
     return;
   }
   if (e.key === 'F6') {
-    // F6 — запустить скетч в эмуляторе телефона.
+    // F6 - запустить скетч в эмуляторе телефона.
     e.preventDefault();
     showDevicePanel();
     runCurrentSketch();

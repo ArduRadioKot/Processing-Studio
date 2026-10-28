@@ -69,12 +69,40 @@ ipcMain.on('set-native-theme', (event, theme) => {
   if (!nativeBlur) for (const w of windows) if (!w.isDestroyed()) w.setBackgroundColor(windowColor());
 });
 
-/** Menu entries just tell the renderer which command to run; shortcuts are shown but handled by the page itself. */
+let appLanguage = 'ru';
+const menuEnglish = {
+  'О программе ': 'About ', 'Настройки…': 'Settings...', 'Проверить обновления…': 'Check for updates...',
+  'Скрыть': 'Hide', 'Скрыть остальные': 'Hide Others', 'Показать все': 'Show All', 'Выйти': 'Quit',
+  'Файл': 'File', 'Новое окно': 'New Window', 'Новый файл': 'New File', 'Новый ноутбук': 'New Notebook',
+  'Открыть файл или папку…': 'Open File or Folder...', 'Открыть папку проекта…': 'Open Project Folder...',
+  'Быстрое открытие…': 'Quick Open...', 'Сохранить': 'Save', 'Сохранить как…': 'Save As...',
+  'Автосохранение': 'Auto Save', 'Закрыть вкладку': 'Close Tab', 'Открыть закрытую вкладку': 'Reopen Closed Tab',
+  'Правка': 'Edit', 'Отменить': 'Undo', 'Повторить': 'Redo', 'Вырезать': 'Cut', 'Копировать': 'Copy',
+  'Вставить': 'Paste', 'Выделить всё': 'Select All', 'Найти в файле': 'Find in File',
+  'Найти и заменить': 'Find and Replace', 'Перейти к строке…': 'Go to Line...',
+  'Перейти к символу…': 'Go to Symbol...', 'Форматировать документ': 'Format Document',
+  'Поиск по проекту': 'Search Project', 'TODO / FIXME проекта': 'Project TODO / FIXME',
+  'Палитра команд…': 'Command Palette...', 'Вид': 'View', 'Проводник': 'Explorer',
+  'Поиск': 'Search', 'Запуск': 'Run', 'Боковая панель': 'Sidebar', 'Терминал': 'Terminal',
+  'AI-чат': 'AI Chat', 'Предпросмотр Markdown': 'Markdown Preview', 'Разделить редактор': 'Split Editor',
+  'Увеличить масштаб': 'Zoom In', 'Уменьшить масштаб': 'Zoom Out', 'Сбросить масштаб': 'Reset Zoom',
+  'Полноэкранный режим': 'Full Screen', 'Запустить скетч': 'Run Sketch',
+  'Запустить на устройстве': 'Run on Device', 'Панель эмулятора': 'Emulator Panel',
+  'Собрать проект': 'Build Project', 'Установщик сборки…': 'Build Tool Installer...', 'Окно': 'Window'
+};
+function localizeMenu(template) {
+  return template.map(entry => ({ ...entry,
+    ...(entry.label ? { label: appLanguage === 'en' ? (entry.label.startsWith('О программе ') ? 'About ' + app.getName() : menuEnglish[entry.label] || entry.label) : entry.label } : {}),
+    ...(entry.submenu ? { submenu: localizeMenu(entry.submenu) } : {})
+  }));
+}
+
+/** Menu entries tell the renderer which command to run. */
 function buildMacMenu() {
   const send = (id) => () => { const w = getMainWindow(); if (w) w.webContents.send('menu-command', id); };
   const item = (label, id, accelerator) => ({ label, click: send(id), ...(accelerator ? { accelerator, registerAccelerator: false } : {}) });
   const sep = { type: 'separator' };
-  return Menu.buildFromTemplate([
+  return Menu.buildFromTemplate(localizeMenu([
     { label: app.getName(), submenu: [{ role: 'about', label: 'О программе ' + app.getName() }, sep, item('Настройки…', 'settings', 'Cmd+,'), item('Проверить обновления…', 'updates'), sep, { role: 'hide', label: 'Скрыть' }, { role: 'hideOthers', label: 'Скрыть остальные' }, { role: 'unhide', label: 'Показать все' }, sep, { role: 'quit', label: 'Выйти' }] },
     { label: 'Файл', submenu: [
       { label: 'Новое окно', click: () => createWindow(true), accelerator: 'Shift+Cmd+N', registerAccelerator: false },
@@ -103,8 +131,14 @@ function buildMacMenu() {
       item('Собрать проект', 'project-build'), item('Установщик сборки…', 'toolchain-wizard'), item('Терминал', 'terminal'),
     ] },
     { role: 'windowMenu', label: 'Окно' },
-  ]);
+  ]));
 }
+
+ipcMain.handle('set-app-language', (_event, language) => {
+  appLanguage = language === 'en' ? 'en' : 'ru';
+  if (process.platform === 'darwin') Menu.setApplicationMenu(buildMacMenu());
+  return appLanguage;
+});
 
 function createWindow(secondary = false) {
   // Further windows are cascaded so they do not hide each other.

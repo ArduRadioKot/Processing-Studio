@@ -1,5 +1,5 @@
 /**
- * Упаковка Processing Studio. Toolchain в extraResources — по возможности;
+ * Упаковка Processing Studio. Toolchain в extraResources - по возможности;
  * если скачать не удалось, установщик всё равно собирается и докачает JDK/SDK при первом запуске.
  *
  *   node scripts/pack.mjs all
@@ -43,7 +43,7 @@ function run(cmd, args, { ignoreFail = false } = {}) {
 
 async function prefetch(args) {
   if (process.env.SKIP_TOOLCHAIN === '1') {
-    console.log('SKIP_TOOLCHAIN=1 — JDK/SDK в пакет не кладутся');
+    console.log('SKIP_TOOLCHAIN=1 - JDK/SDK в пакет не кладутся');
     return;
   }
   console.log(`\n--- toolchain ${args.join(' ')} ---`);

@@ -154,7 +154,7 @@ const webPipeline = {
   async run({ target } = {}) {
     const label = TARGET_LABELS[target || TARGET_WEB] || target;
     if (target === TARGET_WEB) {
-      return fail('not-implemented', `Запуск Web в браузере пока не подключён. Соберите проект — результат в www/.`);
+      return fail('not-implemented', `Запуск Web в браузере пока не подключён. Соберите проект - результат в www/.`);
     }
     return fail('not-implemented', `Запуск ${label} на устройстве пока не реализован. Соберите проект и откройте его в Android Studio / Xcode.`);
   },

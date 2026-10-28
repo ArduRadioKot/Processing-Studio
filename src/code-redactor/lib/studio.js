@@ -4,7 +4,7 @@
  *     config/    настройки приложения
  *     projects/  проекты (по папке на проект)
  *     themes/    пользовательские темы
- *     toolchain/ JDK, Android SDK, Gradle, Node — ставит установщик сборки
+ *     toolchain/ JDK, Android SDK, Gradle, Node - ставит установщик сборки
  */
 const path = require('path');
 const os = require('os');

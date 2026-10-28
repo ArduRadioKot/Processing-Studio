@@ -25,7 +25,7 @@ function writeSdkDir(androidDir, sdk) {
   fs.writeFileSync(path.join(androidDir, 'local.properties'), `sdk.dir=${dir}\n`, 'utf8');
 }
 
-/** Путь JDK этой машины не должен попадать в проект — иначе сборка ломается на другом компьютере. */
+/** Путь JDK этой машины не должен попадать в проект - иначе сборка ломается на другом компьютере. */
 function stripPersistedJavaHome(androidDir) {
   if (!androidDir) return;
   const file = path.join(androidDir, 'gradle.properties');
@@ -157,7 +157,7 @@ async function assembleGradle(event, androidDir, tools) {
   if (!jdk) {
     return {
       ok: false,
-      error: 'Нужен JDK 17–21. Откройте пакетный менеджер и поставьте Java JDK 17.',
+      error: 'Нужен JDK 17-21. Откройте пакетный менеджер и поставьте Java JDK 17.',
     };
   }
   const sdk = resolveSdkRoot() || tools?.androidSdk?.path;
@@ -198,7 +198,7 @@ async function runCap(event, root, args) {
 async function buildWebCapacitor(event, { root, platform, tools }) {
   if (!root) return { ok: false, error: 'Проект не открыт' };
   const www = path.join(root, 'www', 'index.html');
-  if (!exists(www)) return { ok: false, error: 'Нет www/index.html — сначала трансляция скетча' };
+  if (!exists(www)) return { ok: false, error: 'Нет www/index.html - сначала трансляция скетча' };
   if (platform === 'android' || platform === 'ios') {
     try {
       const ids = platform === 'android' ? ['node', 'java', 'gradle', 'androidSdk'] : ['node'];

@@ -189,7 +189,7 @@ function registerAiIpc() {
     } catch (err) {
       const msg = err?.message || String(err);
       console.error('AI Error:', msg);
-      // Не бросаем — иначе Electron пишет "Error occurred in handler"
+      // Не бросаем - иначе Electron пишет "Error occurred in handler"
       return {
         success: false,
         error: /ECONNREFUSED|4096/.test(msg)

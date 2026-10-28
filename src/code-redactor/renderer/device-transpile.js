@@ -15,7 +15,7 @@ const JAVA_TYPES = [
   'PVector', 'PFont', 'PImage',
 ];
 
-/** Events whose name in Processing is also a boolean — handlers and flags get separate names. */
+/** Events whose name in Processing is also a boolean - handlers and flags get separate names. */
 const EVENT_HANDLERS = [
   'keyPressed', 'keyReleased', 'keyTyped',
   'mousePressed', 'mouseReleased', 'mouseClicked', 'mouseDragged', 'mouseMoved', 'mouseWheel',
@@ -93,7 +93,7 @@ function findClosing(text, open, close) {
   return -1;
 }
 
-/** The text starts right after the opening bracket — finds its pair. */
+/** The text starts right after the opening bracket - finds its pair. */
 function findClosingInside(text, close) {
   let depth = 1;
   for (let i = 0; i < text.length; i++) {
@@ -118,7 +118,7 @@ function transformDeclaration(code, javaMode, inClass) {
   const close = findClosingInside(rest, ')');
   if (close < 0) return code;
   const params = rest.slice(0, close);
-  // Java: `void f() throws Exception {` — в JS конструкции throws нет.
+  // Java: `void f() throws Exception {` - в JS конструкции throws нет.
   const tail = rest.slice(close + 1).replace(/^(\s*)throws\s+[A-Za-z_][\w.]*(\s*,\s*[A-Za-z_][\w.]*)*\s*/, '$1');
   const newName = javaMode && EVENT_HANDLERS.includes(name)
     ? (name.startsWith('on') ? `__${name}` : '__on' + name.charAt(0).toUpperCase() + name.slice(1))
@@ -153,7 +153,7 @@ function transformDeclarationTypes(code, javaMode, inClass) {
       return pre + parts.map((part) => `${part};`).join(' ');
     });
   }
-  // volatile/transient — просто модификаторы, поле остаётся изменяемым.
+  // volatile/transient - просто модификаторы, поле остаётся изменяемым.
   const re = new RegExp(`(^|[^\\w$.])((?:(?:final|volatile|transient)\\s+)*)(${typePattern})\\s+([A-Za-z_]\\w*)`, 'g');
   return code.replace(re, (_all, pre, mods, _type, name) => `${pre}${/\bfinal\b/.test(mods) ? 'const ' : 'let '}${name}`);
 }
@@ -168,7 +168,7 @@ function transformCasts(code) {
   return code
     .replace(/(?<![\w$.])\((?:float|double)\)\s*/g, '1*')
     .replace(/(?<![\w$.])\((?:int|long|short|byte|char)\)\s*/g, '~~')
-    // Приведение к классу: (SensorManager) expr — убираем, если дальше идёт выражение.
+    // Приведение к классу: (SensorManager) expr - убираем, если дальше идёт выражение.
     .replace(/(?<![\w$.])\(([A-Z][A-Za-z0-9_]*(?:\s*<[^<>]*>)?)\)\s*(?=[A-Za-z_!~+\-(])/g, '')
     .replace(/\bnew\s+(ArrayList|HashMap)\s*<[^<>]*>/g, 'new $1')
     .replace(/\bMath\.random\s*\(\s*\)/g, 'random')
@@ -179,7 +179,7 @@ function stripNumericSuffixes(code) {
   return code.replace(/(?<![\w.$])(\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)[fFdDlL]\b/g, '$1');
 }
 
-/** In Java mode `keyPressed` is both a handler and a boolean — the boolean gets its own name. */
+/** In Java mode `keyPressed` is both a handler and a boolean - the boolean gets its own name. */
 function renameBooleans(code) {
   return code
     .replace(/\bkeyPressed\b(?!\s*\()/g, '__keyDown')
@@ -234,7 +234,7 @@ function matchBrace(code, open) {
 }
 
 /**
- * Java разрешает несколько catch подряд, JS — только один.
+ * Java разрешает несколько catch подряд, JS - только один.
  * Второй и следующие блоки комментируем: их тела выполняются внутри первого catch.
  * Номера строк при этом сохраняются.
  */
@@ -262,7 +262,7 @@ function mergeJavaCatches(code) {
     const closeIdx = last + before.length - 1;
     out += code.slice(last, closeIdx);
     out += '/* ' + code.slice(closeIdx, nextOpen + 1) + ' */';
-    // Скобка второго catch закрывает первый — лишней она не остаётся.
+    // Скобка второго catch закрывает первый - лишней она не остаётся.
     out += code.slice(nextOpen + 1, nextEnd + 1);
     last = nextEnd + 1;
     re.lastIndex = last;
@@ -272,9 +272,9 @@ function mergeJavaCatches(code) {
 }
 
 /**
- * В Java поле класса доступно без this., в JS — только через this.
+ * В Java поле класса доступно без this., в JS - только через this.
  * Квалифицируем обращения к полям внутри методов (параметры и локальные переменные
- * перекрывают поле — их не трогаем).
+ * перекрывают поле - их не трогаем).
  */
 function qualifyClassFields(code) {
   const classRe = /^(?:[ \t]*)(?:(?:public|private|protected|static|final|abstract)\s+)*class\s+[A-Za-z_]\w*/gm;
@@ -325,7 +325,7 @@ function processClassBody(body, className = '') {
     const end = matchBrace(body, open);
     if (end < 0) break;
     let header = body.slice(m.index, open + 1);
-    // Конструктор в Java называется как класс, в JS — всегда constructor.
+    // Конструктор в Java называется как класс, в JS - всегда constructor.
     if (className && m[3] === className) {
       header = header.replace(new RegExp(`\\b${className}\\s*\\(`), 'constructor(');
     }
@@ -395,7 +395,7 @@ function stripClassInheritance(code) {
   return code.replace(/\b(class\s+[A-Za-z_]\w*)\s+(extends\s+[A-Za-z_][\w.]*)?\s*(implements\s+[A-Za-z_][\w.]*(\s*,\s*[A-Za-z_][\w.]*)*)?/g, '$1');
 }
 
-/** `super.onPause()` в Java-скетче — вызов базовой реализации, в эмуляторе он не нужен. */
+/** `super.onPause()` в Java-скетче - вызов базовой реализации, в эмуляторе он не нужен. */
 function stripSuperCalls(code) {
   return code.replace(/\bsuper\.(onPause|onResume|onStop|onDestroy|onRestart)\s*\(\s*\)\s*;/g, 'void 0;')
     .replace(/\bsuper\.([A-Za-z_]\w*)\s*\(/g, '$1(');
@@ -425,11 +425,11 @@ export function transpileProcessing(source) {
   const mode = detectProcessingMode(src);
   const warnings = [];
   if (mode === 'python') {
-    return { code: '', mode, warnings: ['Python-режим Processing не поддерживается эмулятором — перепишите скетч на Java или JS.'] };
+    return { code: '', mode, warnings: ['Python-режим Processing не поддерживается эмулятором - перепишите скетч на Java или JS.'] };
   }
   const javaMode = mode === 'java';
 
-  // Brace context: we need to know whether a line sits directly in a class body —
+  // Brace context: we need to know whether a line sits directly in a class body -
   // there the declarations become class fields, not variables.
   const stack = [];
   let pending = null;
@@ -483,7 +483,7 @@ export function transpileProcessing(source) {
 
   const code = out.join('\n');
   if (!/\b(?:setup|draw)\s*\(/.test(code)) {
-    warnings.push('В скетче нет setup()/draw() — экран останется пустым.');
+    warnings.push('В скетче нет setup()/draw() - экран останется пустым.');
   }
   return { code, mode, warnings };
 }

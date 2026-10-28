@@ -34,7 +34,7 @@ import java.util.Random;
 
 /**
  * Мини-реализация API Processing поверх android.graphics.Canvas.
- * Рисование идёт в потоке UI, кадры — по requestAnimationFrame.
+ * Рисование идёт в потоке UI, кадры - по requestAnimationFrame.
  */
 public class PApplet extends View implements SensorEventListener {
 
@@ -96,7 +96,7 @@ public class PApplet extends View implements SensorEventListener {
   public String orientation = "portrait";
   public int frameRate = 60;
   public int displayWidth, displayHeight;
-  /** Плотность экрана (в Processing for Android — поле, а не метод). */
+  /** Плотность экрана (в Processing for Android - поле, а не метод). */
   public float displayDensity = 1f;
 
   /** Adaptive UI: скетч в координатах size() масштабируется на весь экран. */
@@ -602,7 +602,7 @@ public class PApplet extends View implements SensorEventListener {
   public SensorManager getSensorManager() { return sensors; }
   public String getPackageName() { return super.getContext().getPackageName(); }
 
-  /** Ориентация фиксируется в manifest; здесь — только чтение. */
+  /** Ориентация фиксируется в manifest; здесь - только чтение. */
   public void orientation(int mode) {
     if (activity == null) return;
     activity.setRequestedOrientation(mode);
@@ -641,7 +641,7 @@ public class PApplet extends View implements SensorEventListener {
     return null; // используется системный шрифт
   }
 
-  /** Запрос runtime-разрешения. Второй аргумент — имя метода-обработчика(boolean). */
+  /** Запрос runtime-разрешения. Второй аргумент - имя метода-обработчика(boolean). */
   public void requestPermission(String permission, String callback) {
     permissionCallback = callback;
     if (activity == null) return;
@@ -697,7 +697,7 @@ public class PApplet extends View implements SensorEventListener {
 
 export const PVECTOR_JAVA = `package %(package)s;
 
-/** Вектор — как в Processing. */
+/** Вектор - как в Processing. */
 public class PVector {
   public float x, y, z;
 
@@ -786,18 +786,18 @@ public class PFont {
 export const ADAPTIVE_UI_JAVA = `package %(package)s;
 
 /**
- * AdaptiveUI — библиотека, которая делает любой UI адаптивным.
+ * AdaptiveUI - библиотека, которая делает любой UI адаптивным.
  *
  * Скетч пишется в координатах size() (например size(390, 844)).
  * На реальном телефоне рисование, текст, обводки и касания
  * автоматически масштабируются под экран. Менять скетч не нужно:
- * достаточно AdaptiveUI.attach(this) — Processing Studio вызывает его сама,
+ * достаточно AdaptiveUI.attach(this) - Processing Studio вызывает его сама,
  * если при создании проекта включена галочка «Adaptive UI».
  *
  * Режимы:
- *   CONTAIN  — вписать целиком, поля по краям (по умолчанию)
- *   COVER    — заполнить экран, лишнее обрезается
- *   STRETCH  — растянуть по ширине и высоте независимо
+ *   CONTAIN  - вписать целиком, поля по краям (по умолчанию)
+ *   COVER    - заполнить экран, лишнее обрезается
+ *   STRETCH  - растянуть по ширине и высоте независимо
  *
  * Примеры:
  *   AdaptiveUI.attach(this);
@@ -829,7 +829,7 @@ public class AdaptiveUI {
     return app != null && app.isAdaptiveUI();
   }
 
-  /** Текущий масштаб (при STRETCH — меньшая из осей). */
+  /** Текущий масштаб (при STRETCH - меньшая из осей). */
   public static float scale(PApplet app) {
     return app == null ? 1f : app.uiScale();
   }

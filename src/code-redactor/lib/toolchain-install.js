@@ -521,7 +521,7 @@ async function installXcode(event) {
 async function ensureJdkFor(event, id) {
   if (id !== 'androidSdk' && id !== 'gradle') return;
   if (await resolveJdkHome()) return;
-  log(event, 'Для этого шага нужен JDK 17 — ставлю Temurin…');
+  log(event, 'Для этого шага нужен JDK 17 - ставлю Temurin…');
   await installJava(event);
 }
 
@@ -546,10 +546,10 @@ async function uninstallOne(event, id, opts) {
   const m = managedPaths();
   send(event, { type: 'tool', tool: id, status: 'removing' });
   if (id === 'java') {
-    if (!isManaged(m.jdk) && !exists(m.jdk)) throw new Error('Студийный JDK не найден — системный Java не удаляю');
+    if (!isManaged(m.jdk) && !exists(m.jdk)) throw new Error('Студийный JDK не найден - системный Java не удаляю');
     rmrf(m.jdk);
   } else if (id === 'gradle') {
-    if (!exists(m.gradle)) throw new Error('Студийный Gradle не найден — системный не удаляю');
+    if (!exists(m.gradle)) throw new Error('Студийный Gradle не найден - системный не удаляю');
     rmrf(m.gradle);
   } else if (id === 'node' || id === 'npm') {
     if (!exists(m.node)) {
@@ -559,7 +559,7 @@ async function uninstallOne(event, id, opts) {
     }
     rmrf(m.node);
   } else if (id === 'androidSdk') {
-    if (!exists(m.androidSdk)) throw new Error('Студийный Android SDK не найден — системный не удаляю');
+    if (!exists(m.androidSdk)) throw new Error('Студийный Android SDK не найден - системный не удаляю');
     rmrf(m.androidSdk);
   } else if (id === 'capacitor') {
     const res = await uninstallCapacitor(opts.root, (line) => log(event, line));
@@ -626,7 +626,7 @@ function catalogForPlatform() {
 }
 
 /**
- * Перед сборкой: если на компьютере нет JDK 17–21 / Gradle / SDK 34,
+ * Перед сборкой: если на компьютере нет JDK 17-21 / Gradle / SDK 34,
  * ставит их в Documents/ProcessingStudio/toolchain. Системные SDK не трогает.
  */
 async function ensureBuildTools(event, ids = ['java', 'gradle', 'androidSdk']) {

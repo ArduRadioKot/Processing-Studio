@@ -41,7 +41,7 @@ export const STACK_META = {
   [STACK_WEB]: {
     id: STACK_WEB,
     label: 'Processing2Web',
-    detail: 'Скетч транслируется в JavaScript/HTML. Android и iOS — через Capacitor, Web — как веб-приложение.',
+    detail: 'Скетч транслируется в JavaScript/HTML. Android и iOS - через Capacitor, Web - как веб-приложение.',
   },
   [STACK_ANDROID]: {
     id: STACK_ANDROID,

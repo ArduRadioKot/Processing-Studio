@@ -94,7 +94,7 @@ export function showExplorerPanel() {
   }
 }
 
-/** Кнопки проводника живут в пересобираемом HTML — слушаем клики на панели, а не на конкретных узлах. */
+/** Кнопки проводника живут в пересобираемом HTML - слушаем клики на панели, а не на конкретных узлах. */
 let explorerActionsBound = false;
 export function setupExplorerActions() {
   if (explorerActionsBound) return;
@@ -470,7 +470,7 @@ export function getFileIcon(fileName) {
 }
 
 // Функции для создания файлов и папок в текущей папке.
-// window.prompt в Electron не показывает диалог и сразу возвращает null — поэтому имя вводим в дереве.
+// window.prompt в Electron не показывает диалог и сразу возвращает null - поэтому имя вводим в дереве.
 
 function targetFolder() {
   if (!state.currentFolder) return null;

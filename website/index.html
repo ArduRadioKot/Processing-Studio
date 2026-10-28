@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f2f3ef">
+  <script>try{const saved=localStorage.getItem('processing-studio-theme');document.documentElement.dataset.theme=saved==='dark'||saved==='light'?saved:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch{document.documentElement.dataset.theme=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}</script>
   <meta name="description" content="Processing Studio: полноценная IDE для мобильных приложений на Processing. Редактор PDE, эмулятор телефона, датчики и экспорт Android-проекта в одном окне.">
   <meta property="og:title" content="Processing Studio: написать приложение проще, чем кажется">
   <meta property="og:description" content="Пишите на Processing, проверяйте скетч в эмуляторе и экспортируйте Android-проект.">
@@ -12,6 +13,7 @@
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="img/icon.png" type="image/png">
   <link rel="stylesheet" href="site.css">
+  <script defer src="i18n.js"></script>
   <script defer src="site.js"></script>
 </head>
 <body id="top">
@@ -20,6 +22,8 @@
     <symbol id="icon-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-7-7 7 7 7-7"/></symbol>
     <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-7 7 7-7 7 7"/></symbol>
     <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
   </svg>
   <a class="skip-link" href="#main">К содержимому</a>
   <header class="site-header page-grid">
@@ -33,8 +37,12 @@
       <a href="#android">Android</a>
       <a href="#editor">Редактор</a>
     </nav>
-    <a class="header-download" href="#download">Скачать <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></span></a>
-    <button class="menu-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Открыть меню">Меню <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"/></svg></button>
+    <div class="header-actions">
+      <div class="language-switch" role="group" aria-label="Язык сайта"><button type="button" data-site-lang="ru" lang="ru">RU</button><span aria-hidden="true">/</span><button type="button" data-site-lang="en" lang="en">EN</button></div>
+      <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false"><svg class="icon theme-icon-moon" aria-hidden="true" focusable="false"><use href="#icon-moon"/></svg><svg class="icon theme-icon-sun" aria-hidden="true" focusable="false"><use href="#icon-sun"/></svg><span class="theme-toggle-label">Тёмная тема</span></button>
+      <a class="header-download" href="#download">Скачать <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></span></a>
+      <button class="menu-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Открыть меню">Меню <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"/></svg></button>
+    </div>
   </header>
   <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация" hidden>
     <a href="#idea">Идея</a><a href="#device">Эмулятор</a><a href="#android">Android</a><a href="#editor">Редактор</a><a href="#download">Скачать</a>

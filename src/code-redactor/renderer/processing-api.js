@@ -1,5 +1,5 @@
 /**
- * Словарь API Processing и Android Mode — источник для автодополнения.
+ * Словарь API Processing и Android Mode - источник для автодополнения.
  * Составлен по документации Processing for Android (приложение B) и книге
  * «Processing для Android» (глава 9, 12, 14).
  */
@@ -45,7 +45,7 @@ export const PROCESSING_KEYWORDS = [
   'Activity', 'View', 'Bundle', 'Handler', 'Looper', 'Runnable', 'Thread', 'File', 'IOException',
 ];
 
-/** Члены встроенных переменных и классов — подсказки после точки. */
+/** Члены встроенных переменных и классов - подсказки после точки. */
 export const PROCESSING_MEMBERS = [
   // Переменные
   'x', 'y', 'z', 'width', 'height', 'pixels', 'frameCount', 'frameRate', 'millis', 'deltaTime',
@@ -76,7 +76,7 @@ export const PROCESSING_MEMBERS = [
   'getPreferences', 'getSharedPreferences', 'putString', 'getString',
 ];
 
-/** Частые слова Java-скетчей — помогают автодополнению в .pde. */
+/** Частые слова Java-скетчей - помогают автодополнению в .pde. */
 export const PROCESSING_EXTRA = [
   'volatile', 'public', 'private', 'protected', 'static', 'final', 'abstract', 'synchronized', 'native',
   'implements', 'extends', 'interface', 'package', 'import', 'instanceof', 'super', 'this',

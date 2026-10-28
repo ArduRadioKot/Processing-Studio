@@ -148,7 +148,7 @@ export async function initializeApp() {
     if (hadSavedTabs) setTimeout(() => saveAllConfig(), 0); // drop the old session's file contents from the config
     if (config.editorTabs && Array.isArray(config.editorTabs) && config.editorTabs.length > 0) {
       if (config.editorTabs.length > 40) {
-        console.warn('Повреждённый editorTabs в конфиге:', config.editorTabs.length, '— сбрасываем');
+        console.warn('Повреждённый editorTabs в конфиге:', config.editorTabs.length, '- сбрасываем');
         state.currentTabs = [];
         showWelcomePage();
         setTimeout(() => saveAllConfig(), 0);

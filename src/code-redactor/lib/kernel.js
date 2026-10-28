@@ -115,7 +115,7 @@ function registerKernelIpc(getMainWindow) {
   ipcMain.handle('kernel-interrupt', (e, { id } = {}) => {
     const k = kernels.get(id);
     if (!k) return { success: false, error: 'Kernel не запущен' };
-    if (process.platform === 'win32') return { success: false, error: 'Прерывание недоступно в Windows — перезапустите ядро' };
+    if (process.platform === 'win32') return { success: false, error: 'Прерывание недоступно в Windows - перезапустите ядро' };
     try { k.proc.kill('SIGINT'); return { success: true }; } catch (err) { return { success: false, error: err.message }; }
   });
 

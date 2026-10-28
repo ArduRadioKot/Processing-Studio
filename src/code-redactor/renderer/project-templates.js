@@ -110,7 +110,7 @@ function multiReadme(settings) {
 Тип: мультиплатформенный (Android / iOS / Web)
 Стек: Processing2Web + Capacitor
 
-Capacitor ставится в эту папку при создании проекта. Сборка Web / Android / iOS —
+Capacitor ставится в эту папку при создании проекта. Сборка Web / Android / iOS -
 кнопка «Собрать» в панели «Запуск» или пакетный менеджер, если нет Node / SDK.
 
 Скетч \`${settings.sketch}\` транслируется в JavaScript существующим Processing2Web

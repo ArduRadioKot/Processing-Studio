@@ -1,7 +1,7 @@
 /**
  * Проект Processing Studio: настройки приложения и экспорт в Android-проект (Gradle).
  *
- * Скетч (.pde) — это Java, поэтому экспорт не требует Processing for Android:
+ * Скетч (.pde) - это Java, поэтому экспорт не требует Processing for Android:
  * исходник становится подклассом собственного PApplet, а в проект попадает
  * мини-рантайм с рисованием, касаниями, датчиками и разрешениями.
  */
@@ -108,7 +108,7 @@ const METHOD_RE = /^\s*(?:(?:public|private|protected|static|final|abstract)\s+)
 const FIELD_RE = /^\s*(?:(?:public|private|protected|static|final|volatile|transient)\s+)*([A-Za-z_][\w.]*(?:\s*<[^<>]*>)?(?:\s*\[\s*\])*)\s+([A-Za-z_]\w*)\s*(?:=[^;]*)?;\s*$/;
 const STATEMENT_WORDS = /^(?:return|if|else|for|while|do|switch|case|default|break|continue|try|catch|finally|throw|new|println|print)\b/;
 
-/** Processing считает 0.14 литералом float; javac — double. */
+/** Processing считает 0.14 литералом float; javac - double. */
 function javaifyFloats(text) {
   let out = '';
   let inString = false;
@@ -161,7 +161,7 @@ function javaifyFloats(text) {
 
 /**
  * Разбирает .pde: верхнеуровневые объявления становятся полями класса,
- * верхнеуровневые операторы — началом setup(), методы — методами класса.
+ * верхнеуровневые операторы - началом setup(), методы - методами класса.
  */
 function sketchText(source) {
   if (Array.isArray(source)) return source.map((s) => s?.code || '').join('\n');
@@ -191,11 +191,11 @@ export function sketchToJava(source, className = 'Sketch', pkg = '', opts = {}) 
     'import android.content.Context;',
   ]);
 
-  // Все вкладки .pde склеиваются в один класс — как в preprocessor Processing.
+  // Все вкладки .pde склеиваются в один класс - как в preprocessor Processing.
   sources.forEach((file, fileIndex) => {
     const parsed = parseSketchFile(file.code, fileIndex === 0);
     parsed.imports.forEach((imp) => {
-      // AdaptiveUI лежит в том же пакете, что и скетч — `import AdaptiveUI;` в Java невалиден.
+      // AdaptiveUI лежит в том же пакете, что и скетч - `import AdaptiveUI;` в Java невалиден.
       if (/^import\s+(?:[\w.]+\.)?AdaptiveUI\s*;$/.test(imp)) return;
       imports.add(imp);
     });
@@ -327,7 +327,7 @@ function parseSketchFile(source, isMain) {
       for (; j < lines.length; j++) {
         const current = lines[j];
         const nextDepth = depth + countBraces(current);
-        if (started && nextDepth <= 0) break; // закрывающая скобка — её ставим сами
+        if (started && nextDepth <= 0) break; // закрывающая скобка - её ставим сами
         body.push(current);
         depth = nextDepth;
         if (!started && current.includes('{')) started = true;
@@ -403,7 +403,7 @@ include ':app'
 }
 
 const GRADLEW_UNIX = `#!/bin/sh
-# Gradle Wrapper — Processing Studio (macOS / Linux)
+# Gradle Wrapper - Processing Studio (macOS / Linux)
 APP_HOME=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 CLASSPATH="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
 if [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/bin/java" ]; then
@@ -609,7 +609,7 @@ export async function exportAndroidProject({ root, sketchSource, sketchName, set
   };
 
   try {
-    // Старый пакет мог остаться после смены package name — убираем его целиком.
+    // Старый пакет мог остаться после смены package name - убираем его целиком.
     try { await window.electronAPI?.deleteFile?.(javaPath); } catch (err) { /* папки ещё нет */ }
     await write('settings.gradle', gradleRoot(finalSettings.name));
     await write('build.gradle', `// Сгенерировано Processing Studio\nplugins {\n    id 'com.android.application' version '8.5.2' apply false\n}\n`);
@@ -642,7 +642,7 @@ export async function exportAndroidProject({ root, sketchSource, sketchName, set
     const adaptiveNote = finalSettings.adaptiveUi
       ? `\n## Adaptive UI\n\nВ проект подключена библиотека \`AdaptiveUI\`: любой интерфейс из \`size()\` масштабируется под экран телефона, касания пересчитываются автоматически. Чтобы выключить: уберите \`AdaptiveUI.attach(sketch)\` в \`MainActivity\` или вызовите \`AdaptiveUI.detach(sketch)\`.\n`
       : '';
-    await write('README.md', `# ${finalSettings.name}\n\nAndroid-проект, созданный Processing Studio из скетча \`${sketchName || finalSettings.sketch}\`.\n\n## Сборка\n\nВ IDE: **Запуск → Собрать**. На любом macOS / Windows / Linux студия сама найдёт JDK 17–21 и Android SDK или поставит их в \`Documents/ProcessingStudio/toolchain\`.\n\nВ папке \`android\` есть Gradle Wrapper: \`./gradlew assembleDebug\` (Windows: \`gradlew.bat\`). JDK задайте через \`JAVA_HOME\`, путь к SDK — в \`local.properties\` (файл локальный, в git не входит).\n\nЛибо откройте папку в Android Studio.\n\nПриложение использует собственный рантайм \`PApplet\` — Processing for Android не требуется.\n${adaptiveNote}\nPackage: \`${pkg}\`\nMin SDK: ${finalSettings.minSdk}, Target SDK: ${finalSettings.targetSdk}\n`);
+    await write('README.md', `# ${finalSettings.name}\n\nAndroid-проект, созданный Processing Studio из скетча \`${sketchName || finalSettings.sketch}\`.\n\n## Сборка\n\nВ IDE: **Запуск → Собрать**. На любом macOS / Windows / Linux студия сама найдёт JDK 17-21 и Android SDK или поставит их в \`Documents/ProcessingStudio/toolchain\`.\n\nВ папке \`android\` есть Gradle Wrapper: \`./gradlew assembleDebug\` (Windows: \`gradlew.bat\`). JDK задайте через \`JAVA_HOME\`, путь к SDK - в \`local.properties\` (файл локальный, в git не входит).\n\nЛибо откройте папку в Android Studio.\n\nПриложение использует собственный рантайм \`PApplet\` - Processing for Android не требуется.\n${adaptiveNote}\nPackage: \`${pkg}\`\nMin SDK: ${finalSettings.minSdk}, Target SDK: ${finalSettings.targetSdk}\n`);
     return { ok: true, path: appDir };
   } catch (err) {
     return { ok: false, error: err.message };

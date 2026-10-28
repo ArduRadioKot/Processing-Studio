@@ -97,7 +97,7 @@ body.resizing-panel { user-select: none; cursor: col-resize; }
 }
 .phone-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; display: block; }
 
-/* Блик по стеклу — как у настоящего дисплея. */
+/* Блик по стеклу - как у настоящего дисплея. */
 .phone-screen::after {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background: linear-gradient(128deg, rgba(255, 255, 255, .07) 0%, rgba(255, 255, 255, .02) 26%, transparent 46%);
@@ -163,7 +163,7 @@ body.resizing-panel { user-select: none; cursor: col-resize; }
   box-shadow: 0 0 6px rgba(0, 0, 0, .35);
 }
 
-/* Боковые кнопки: питание — справа, громкость — слева. */
+/* Боковые кнопки: питание - справа, громкость - слева. */
 .phone-side {
   position: absolute; width: 3px; border-radius: 2px; z-index: 1; cursor: pointer;
   background: linear-gradient(90deg, #2b2e35, #55595f 45%, #23262c);

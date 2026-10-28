@@ -160,6 +160,6 @@ export async function showRunPanel() {
   if (kind) paintTools(document.getElementById('run-tools'), kind, target);
   else {
     const host = document.getElementById('run-tools');
-    if (host) host.innerHTML = '<div class="ps-hint">Стек не задан — проверка инструментов недоступна.</div>';
+    if (host) host.innerHTML = '<div class="ps-hint">Стек не задан - проверка инструментов недоступна.</div>';
   }
 }

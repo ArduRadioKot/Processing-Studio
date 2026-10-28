@@ -84,7 +84,7 @@ function setBanner(box, bundled) {
     el.textContent = 'В установщике Processing Studio уже лежат JDK, SDK, Gradle и Node. Их можно поставить без интернета.';
   } else {
     el.hidden = false;
-    el.textContent = 'Архивы не упакованы в это приложение — недостающее скачается при установке. Полный офлайн-набор попадает в DMG / NSIS через npm run build.';
+    el.textContent = 'Архивы не упакованы в это приложение - недостающее скачается при установке. Полный офлайн-набор попадает в DMG / NSIS через npm run build.';
   }
 }
 
@@ -137,7 +137,7 @@ export async function openToolchainWizard(opts = {}) {
         <button type="button" class="ps-close" data-close>Esc</button>
       </div>
       <div class="ps-modal-body">
-        <div class="ps-hint">Один набор для APK и Capacitor: JDK 17, Android SDK 34, Gradle 8.7 и Node 20. Ставится в toolchain этой машины. Системный SDK не переписывается. Xcode — только из App Store.</div>
+        <div class="ps-hint">Один набор для APK и Capacitor: JDK 17, Android SDK 34, Gradle 8.7 и Node 20. Ставится в toolchain этой машины. Системный SDK не переписывается. Xcode - только из App Store.</div>
         <div class="tw-banner" id="tw-banner" hidden></div>
         <div class="tw-path" id="tw-path"></div>
         <div class="tw-list" id="tw-list"><div class="ps-hint">Проверяю инструменты…</div></div>

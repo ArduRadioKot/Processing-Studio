@@ -1,4 +1,4 @@
-/** Late-bound editor chrome APIs — breaks tabs ↔ editor cycles */
+/** Late-bound editor chrome APIs - breaks tabs ↔ editor cycles */
 const api = {
   updateLineNumbers() {},
   updateSyntaxHighlight() {},

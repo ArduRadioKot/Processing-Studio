@@ -315,7 +315,7 @@ function updateStatus() {
   if (chip.hidden) return;
   chip.className = `status-chip problems${errors ? ' has-errors' : warnings ? ' has-warnings' : ''}`;
   chip.textContent = `${errors ? `ошибок: ${errors}` : ''}${errors && warnings ? ' · ' : ''}${warnings ? `предупреждений: ${warnings}` : ''}`;
-  chip.title = 'Проблемы в файле. Нажмите или F8 — перейти к следующей';
+  chip.title = 'Проблемы в файле. Нажмите или F8 - перейти к следующей';
 }
 
 // ───────────────────────── hover hints ─────────────────────────

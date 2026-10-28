@@ -1,4 +1,4 @@
-/** Late-bound tab UI APIs — breaks terminal ↔ tabs circular imports */
+/** Late-bound tab UI APIs - breaks terminal ↔ tabs circular imports */
 const api = {
   hideWelcomePage() {},
   showWelcomePage() {},

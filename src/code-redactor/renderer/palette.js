@@ -297,7 +297,7 @@ function buildCommands() {
   return list.map((c, i) => ({ ...c, order: i }));
 }
 
-function askInput(placeholder, initial, callback, foot = 'Enter — применить · Esc — отмена') {
+function askInput(placeholder, initial, callback, foot = 'Enter - применить · Esc - отмена') {
   open('input', placeholder, [], foot);
   onSubmit = callback;
   input.value = initial || '';
@@ -445,7 +445,7 @@ function agentPrompt(instruction) {
 }
 
 export function openCommandPalette() {
-  open('commands', 'Введите команду…', buildCommands(), 'Стрелки — выбор · Enter — выполнить · Esc — закрыть');
+  open('commands', 'Введите команду…', buildCommands(), 'Стрелки - выбор · Enter - выполнить · Esc - закрыть');
 }
 
 async function loadFiles() {
@@ -471,12 +471,12 @@ export async function openQuickOpen() {
     order: i,
     run: () => openSearchFile(f.path),
   }));
-  open('files', state.currentFolder ? 'Имя файла или :номер строки' : 'Откройте папку, чтобы искать файлы · :номер строки', [...openTabs, ...fromDisk], 'Enter открыть · «:42» — перейти к строке');
+  open('files', state.currentFolder ? 'Имя файла или :номер строки' : 'Откройте папку, чтобы искать файлы · :номер строки', [...openTabs, ...fromDisk], 'Enter открыть · «:42» - перейти к строке');
 }
 
 export function openProblems() {
   const items = problemItems();
-  open('problems', items.length ? 'Проблемы в файле…' : 'Проблем не найдено', items, 'Enter — перейти к месту · F8 — следующая проблема');
+  open('problems', items.length ? 'Проблемы в файле…' : 'Проблем не найдено', items, 'Enter - перейти к месту · F8 - следующая проблема');
 }
 
 export function openGoToLine() {

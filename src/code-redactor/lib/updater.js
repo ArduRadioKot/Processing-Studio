@@ -24,21 +24,33 @@ function compareVersions(left, right) {
 }
 
 function assetVersion(name) {
-  const match = /^ProcessingStudio-(\d+\.\d+\.\d+)(?:-|\.)/i.exec(String(name || ''));
+  const value = String(name || '');
+  const match = /^(?:ProcessingStudio-|Processing Studio(?: Setup)?[ -]|processing-studio_)(\d+\.\d+\.\d+)(?:[-_. ]|$)/i.exec(value);
   return match ? match[1] : '';
 }
 
 function pickAsset(assets, env) {
   const list = Array.isArray(assets) ? assets : [];
-  const find = pattern => list.find(asset => asset && pattern.test(String(asset.name || ''))) || null;
   const arch = env.arch === 'arm64' ? 'arm64' : env.arch === 'ia32' ? 'ia32' : 'x64';
-  if (env.platform === 'darwin') return find(new RegExp(`-mac-${arch}\\.dmg$`, 'i'));
-  if (env.platform === 'win32') return find(new RegExp(`-win-${arch}\\.exe$`, 'i')) || find(/-Setup-.*\.exe$/i);
-  if (env.platform === 'linux') {
-    if (env.appImage) return find(new RegExp(`-linux-${arch}\\.AppImage$`, 'i'));
-    return find(new RegExp(`-linux-${arch}\\.deb$`, 'i'));
+  const current = (platform, ext) => new RegExp(`^ProcessingStudio-\\d+\\.\\d+\\.\\d+-${platform}-${arch}\\.${ext}$`, 'i');
+  let patterns = [];
+  if (env.platform === 'darwin') {
+    patterns = [current('mac', 'dmg'), new RegExp(`^Processing Studio-\\d+\\.\\d+\\.\\d+-${arch}\\.dmg$`, 'i')];
+    if (arch === 'x64') patterns.push(/^Processing Studio-\d+\.\d+\.\d+\.dmg$/i);
+  } else if (env.platform === 'win32') {
+    patterns = [current('win', 'exe')];
+    if (arch === 'x64') patterns.push(/^Processing Studio Setup \d+\.\d+\.\d+\.exe$/i);
+  } else if (env.platform === 'linux') {
+    patterns = env.appImage
+      ? [current('linux', 'AppImage')]
+      : [current('linux', 'deb')];
+    if (arch === 'x64') patterns.push(env.appImage
+      ? /^Processing Studio-\d+\.\d+\.\d+\.AppImage$/i
+      : /^processing-studio_\d+\.\d+\.\d+_amd64\.deb$/i);
   }
-  return null;
+  const candidates = list.filter(asset => asset && patterns.some(pattern => pattern.test(String(asset.name || ''))));
+  candidates.sort((a, b) => compareVersions(assetVersion(b.name), assetVersion(a.name)));
+  return candidates[0] || null;
 }
 
 function installPlan(env, asset) {
@@ -103,7 +115,7 @@ async function readJson(res) {
 
 function safeName(name) {
   const value = String(name || '');
-  return /^[A-Za-z0-9._-]{1,180}$/.test(value) && path.basename(value) === value ? value : '';
+  return /^[A-Za-z0-9._ -]{1,180}$/.test(value) && path.basename(value) === value ? value : '';
 }
 
 function launch(command, args, env = {}) {
@@ -169,14 +181,21 @@ async function installAppImage(file, tempDir) {
   fs.accessSync(path.dirname(current), fs.constants.W_OK);
   const script = [
     'while kill -0 "$PS_UPDATE_PID" 2>/dev/null; do sleep 0.3; done',
-    'if mv "$PS_UPDATE_FILE" "$PS_UPDATE_APP"; then',
-    '  chmod +x "$PS_UPDATE_APP"',
-    '  "$PS_UPDATE_APP" >/dev/null 2>&1 &',
-    'fi'
+    'rm -f "$PS_UPDATE_STAGE"',
+    'if ! cp "$PS_UPDATE_FILE" "$PS_UPDATE_STAGE"; then rm -f "$PS_UPDATE_STAGE"; exit 1; fi',
+    'chmod +x "$PS_UPDATE_STAGE"',
+    'rm -f "$PS_UPDATE_BACKUP"',
+    'if ! mv "$PS_UPDATE_APP" "$PS_UPDATE_BACKUP"; then rm -f "$PS_UPDATE_STAGE"; exit 1; fi',
+    'if ! mv "$PS_UPDATE_STAGE" "$PS_UPDATE_APP"; then mv "$PS_UPDATE_BACKUP" "$PS_UPDATE_APP"; exit 1; fi',
+    'rm -f "$PS_UPDATE_BACKUP"',
+    '"$PS_UPDATE_APP" >/dev/null 2>&1 &'
   ].join('\n');
   const scriptPath = path.join(tempDir, 'install-appimage.sh');
   fs.writeFileSync(scriptPath, script, { mode: 0o700 });
-  await launch('sh', [scriptPath], { PS_UPDATE_PID: String(process.pid), PS_UPDATE_FILE: file, PS_UPDATE_APP: current });
+  await launch('sh', [scriptPath], {
+    PS_UPDATE_PID: String(process.pid), PS_UPDATE_FILE: file, PS_UPDATE_APP: current,
+    PS_UPDATE_STAGE: current + '.new', PS_UPDATE_BACKUP: current + '.previous'
+  });
 }
 
 function registerUpdaterIpc(ipcMain, { app, BrowserWindow, shell }) {
@@ -227,12 +246,14 @@ function registerUpdaterIpc(ipcMain, { app, BrowserWindow, shell }) {
   async function download() {
     if (downloading) return downloading;
     downloading = (async () => {
+      if (checking) await checking;
       if (!pending) await check();
-      if (!pending.info.available) return { ok: false, error: 'Установлена последняя версия' };
-      if (pending.file && fs.existsSync(pending.file)) {
-        return { ok: true, name: path.basename(pending.file), size: fs.statSync(pending.file).size };
+      const update = pending;
+      if (!update.info.available) return { ok: false, error: 'Установлена последняя версия' };
+      if (update.file && fs.existsSync(update.file)) {
+        return { ok: true, name: path.basename(update.file), size: fs.statSync(update.file).size };
       }
-      const asset = pending.asset;
+      const asset = update.asset;
       if (!asset?.url) return { ok: false, error: 'Для этой системы нет файла в релизе' };
       const name = safeName(asset.name);
       if (!name) return { ok: false, error: 'Недопустимое имя файла обновления' };
@@ -263,7 +284,7 @@ function registerUpdaterIpc(ipcMain, { app, BrowserWindow, shell }) {
         if (total && received !== total) throw new Error('Файл обновления скачан не полностью');
         fs.rmSync(final, { force: true });
         fs.renameSync(part, final);
-        pending.file = final;
+        update.file = final;
         return { ok: true, name, size: received };
       } catch (error) {
         fs.rmSync(part, { force: true });
@@ -296,4 +317,4 @@ function registerUpdaterIpc(ipcMain, { app, BrowserWindow, shell }) {
   });
 }
 
-module.exports = { compareVersions, assetVersion, pickAsset, installPlan, describeRelease, registerUpdaterIpc };
+module.exports = { compareVersions, assetVersion, pickAsset, installPlan, describeRelease, safeName, registerUpdaterIpc };

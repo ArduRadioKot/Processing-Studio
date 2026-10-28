@@ -14,11 +14,11 @@ import { loadProject, PERMISSIONS } from './android-project.js';
 
 /**
  * Пропорции взяты с реальных устройств:
- *  w/h  — разрешение экрана в логических пикселях,
- *  dpr  — плотность,
- *  bezel — толщина рамки корпуса (в тех же логических пикселях),
- *  radius — радиус скругления корпуса,
- *  camera — 'island' (Dynamic Island), 'hole' (точечная камера), 'none'.
+ *  w/h  - разрешение экрана в логических пикселях,
+ *  dpr  - плотность,
+ *  bezel - толщина рамки корпуса (в тех же логических пикселях),
+ *  radius - радиус скругления корпуса,
+ *  camera - 'island' (Dynamic Island), 'hole' (точечная камера), 'none'.
  */
 export const DEVICES = {
   'iphone-se': { label: 'iPhone SE · 375×667', w: 375, h: 667, dpr: 2, camera: 'none', bezel: 30, radius: 14 },
@@ -89,7 +89,7 @@ function panelHtml() {
         <button type="button" class="device-btn" data-act="stop" title="Остановить скетч">${ICON.stop}<span>Стоп</span></button>
       </div>
       <div class="device-row">
-        <span class="device-chip" data-role="fps">— FPS</span>
+        <span class="device-chip" data-role="fps">- FPS</span>
         <button type="button" class="device-btn" data-act="background" title="Свернуть приложение в фон">⏸</button>
         <button type="button" class="device-btn" data-act="panel-sensors" title="Панель датчиков">Датчики</button>
         <button type="button" class="device-btn" data-act="panel-console" title="Консоль скетча">Консоль<span class="device-badge device-badge-inline" data-role="badge" hidden>0</span></button>
@@ -122,8 +122,8 @@ function panelHtml() {
                   <div class="phone-permission-icon">!</div>
                   <div class="phone-permission-title">Запрос разрешения</div>
                   <div class="phone-permission-text">
-                    Приложению <b data-role="perm-app">—</b> нужно разрешение
-                    <b data-role="perm-name">—</b>
+                    Приложению <b data-role="perm-app">-</b> нужно разрешение
+                    <b data-role="perm-name">-</b>
                   </div>
                   <div class="phone-permission-actions">
                     <button type="button" class="phone-permission-btn" data-act="perm-deny">Отклонить</button>
@@ -145,7 +145,7 @@ function panelHtml() {
         </div>
         <div class="device-empty" data-role="empty">
           <div class="device-empty-title">Эмулятор телефона</div>
-          <div class="device-empty-text">Откройте файл <b>.pde</b> и нажмите «Запустить» — скетч соберётся в наш Processing-совместимый рантайм и запустится на экране устройства.</div>
+          <div class="device-empty-text">Откройте файл <b>.pde</b> и нажмите «Запустить» - скетч соберётся в наш Processing-совместимый рантайм и запустится на экране устройства.</div>
         </div>
       </div>
 
@@ -185,16 +185,16 @@ function panelHtml() {
           <div class="device-block">
             <div class="device-block-title">Ориентация</div>
             <div class="device-hint" data-role="orientation">Книжная · 0°</div>
-            <div class="device-hint">Экран: <span data-role="size">—</span></div>
+            <div class="device-hint">Экран: <span data-role="size">-</span></div>
           </div>
         </div>
 
         <div class="device-side-body" data-panel-body="project" hidden>
           <div class="device-block">
             <div class="device-block-title">Приложение</div>
-            <div class="device-hint">Package: <b data-role="pkg">—</b></div>
-            <div class="device-hint">Название: <span data-role="app-name">—</span></div>
-            <div class="device-hint">API: <span data-role="api-level">—</span> · плотность <span data-role="density">—</span></div>
+            <div class="device-hint">Package: <b data-role="pkg">-</b></div>
+            <div class="device-hint">Название: <span data-role="app-name">-</span></div>
+            <div class="device-hint">API: <span data-role="api-level">-</span> · плотность <span data-role="density">-</span></div>
           </div>
           <div class="device-block">
             <div class="device-block-title">Разрешения</div>
@@ -211,7 +211,7 @@ function panelHtml() {
               <input type="text" data-role="pref-value" placeholder="значение">
               <button type="button" class="device-btn" data-act="pref-save">Записать</button>
             </div>
-            <div class="device-hint" data-role="pref-state">—</div>
+            <div class="device-hint" data-role="pref-state">-</div>
           </div>
           <div class="device-block">
             <div class="device-block-title">Местоположение</div>
@@ -549,7 +549,7 @@ function applyDevice() {
   const body = panel.els.phoneBody;
   if (body) {
     body.classList.toggle('is-landscape', panel.landscape);
-    // Силуэт — по реальному устройству: свой кант и свой радиус.
+    // Силуэт - по реальному устройству: свой кант и свой радиус.
     body.style.setProperty('--phone-radius', `${dev.radius ?? Math.round(dev.w * 0.115)}px`);
     body.style.setProperty('--phone-bezel', `${dev.bezel ?? 10}px`);
     body.style.width = `${bodyW}px`;
@@ -618,7 +618,7 @@ function sketchFromEditor() {
 function currentSketch() {
   const active = sketchFromEditor();
   if (active) return active;
-  // The active file is not a sketch — take the last .pde tab that is open.
+  // The active file is not a sketch - take the last .pde tab that is open.
   for (let i = state.currentTabs.length - 1; i >= 0; i--) {
     const tab = state.currentTabs[i];
     if (tab && isEditorTab(tab) && /\.(pde|js|jsx|mjs)$/i.test(tab.name || '')) {
@@ -664,7 +664,7 @@ async function collectSketchSources(sketch) {
   }
   if (!files.length && sketch.code) add(sketch.name, sketch.filePath, sketch.code);
 
-  // The main tab is the one named like the folder — as in Processing.
+  // The main tab is the one named like the folder - as in Processing.
   const folderName = dir ? dir.split(/[\\/]/).pop() : '';
   const main = files.find((f) => folderName && f.name.replace(/\.pde$/i, '') === folderName)
     || files.find((f) => f.path === sketch.filePath)
@@ -698,7 +698,7 @@ function buildSketchScript(sources) {
     line += lines + 1;
   });
   if (!/\bfunction\s+(setup|draw)\s*\(/.test(code)) {
-    addLog('warn', 'В скетче нет setup()/draw() — экран останется пустым.');
+    addLog('warn', 'В скетче нет setup()/draw() - экран останется пустым.');
   }
   return { code, offsets };
 }
@@ -714,7 +714,7 @@ function locateSketchLine(line) {
   return null;
 }
 
-/** Файлы из data/ проекта — как assets в Processing for Android. */
+/** Файлы из data/ проекта - как assets в Processing for Android. */
 async function loadSketchData(sketchPath) {
   const files = {};
   if (!sketchPath) return files;
@@ -765,7 +765,7 @@ export async function runCurrentSketch() {
   panel.errors = 0;
   updateBadge();
 
-  // Все вкладки .pde склеиваются в один скетч — как это делает preprocessor Processing.
+  // Все вкладки .pde склеиваются в один скетч - как это делает preprocessor Processing.
   const sources = await collectSketchSources(sketch);
   const built = buildSketchScript(sources);
   if (!built.code.trim()) {
@@ -884,7 +884,7 @@ function renderPrefs() {
   const entries = Object.entries(panel.prefs || {});
   state.textContent = entries.length
     ? entries.map(([k, v]) => `${k} = ${v}`).join('  ·  ')
-    : '—';
+    : '-';
 }
 
 function renderProject() {
@@ -936,7 +936,7 @@ function updateBadge() {
   }
 }
 
-/** Opens the bottom drawer with the sensors or the console; null — collapses it. */
+/** Opens the bottom drawer with the sensors or the console; null - collapses it. */
 function setSidePanel(which) {
   const host = panel.els.host;
   if (!host) return;
@@ -988,7 +988,7 @@ function wireMessages() {
       panel.running = true;
       if (panel.els.empty) panel.els.empty.hidden = true;
     } else if (data.type === 'orientation') {
-      // sketch зафиксировал ориентацию — поворачиваем устройство
+      // sketch зафиксировал ориентацию - поворачиваем устройство
       const mode = data.mode;
       const wantLandscape = mode === 1 || mode === 3;
       if (wantLandscape !== panel.landscape) {

@@ -1,5 +1,5 @@
 /**
- * Примеры из книги «Processing для Android» — готовые заготовки проектов.
+ * Примеры из книги «Processing для Android» - готовые заготовки проектов.
  * Каждый пример создаётся в ~/Documents/ProcessingStudio/projects/<Имя> и открывается в редакторе.
  */
 
@@ -7,7 +7,7 @@ export const EXAMPLES = [
   {
     id: 'first',
     title: 'Первая программа',
-    hint: 'Глава 3.4 — минимальный sketch: fullScreen, фон и круг под пальцем.',
+    hint: 'Глава 3.4 - минимальный sketch: fullScreen, фон и круг под пальцем.',
     files: [
       {
         name: 'first.pde',
@@ -29,7 +29,7 @@ void draw() {
   {
     id: 'ball-level',
     title: 'Шарик-уровень',
-    hint: 'Глава 12.1 — акселерометр через Android SensorManager: шарик катается по экрану.',
+    hint: 'Глава 12.1 - акселерометр через Android SensorManager: шарик катается по экрану.',
     files: [
       {
         name: 'ballLevel.pde',
@@ -92,7 +92,7 @@ class AccelListener implements SensorEventListener {
   {
     id: 'pinch',
     title: 'Масштаб щипком',
-    hint: 'Глава 9.5 — мультитач: расстояние между двумя пальцами меняет масштаб.',
+    hint: 'Глава 9.5 - мультитач: расстояние между двумя пальцами меняет масштаб.',
     files: [
       {
         name: 'pinch.pde',
@@ -115,7 +115,7 @@ void draw() {
     }
     zoom = constrain(startZoom * d / startDist, 0.3, 5);
   } else {
-    startDist = -1;               // пальцев не два — жест закончен
+    startDist = -1;               // пальцев не два - жест закончен
   }
   translate(width / 2, height / 2);
   scale(zoom);
@@ -130,7 +130,7 @@ void draw() {
   {
     id: 'touch-button',
     title: 'Кнопка TouchButton',
-    hint: 'Глава 14.1 — своя кнопка вместо ControlP5: размеры в долях экрана, отклик на отпускание.',
+    hint: 'Глава 14.1 - своя кнопка вместо ControlP5: размеры в долях экрана, отклик на отпускание.',
     files: [
       {
         name: 'touchButton.pde',
@@ -185,7 +185,7 @@ class TouchButton {
     pressed = over(px, py);
   }
 
-  // true — если палец отпущен над кнопкой (нажатие засчитано)
+  // true - если палец отпущен над кнопкой (нажатие засчитано)
   boolean release(float px, float py) {
     boolean clicked = pressed && over(px, py);
     pressed = false;
@@ -208,7 +208,7 @@ class TouchButton {
   {
     id: 'vector-trail',
     title: 'След на PVector',
-    hint: 'Глава 14.2 — перенос desktop-анимации: PVector, сила от пальца, трение.',
+    hint: 'Глава 14.2 - перенос desktop-анимации: PVector, сила от пальца, трение.',
     files: [
       {
         name: 'vectorTrail.pde',
@@ -223,7 +223,7 @@ void setup() {
 
 void draw() {
   noStroke();
-  fill(20, 20, 30, 40);                     // полупрозрачный прямоугольник — «шлейф»
+  fill(20, 20, 30, 40);                     // полупрозрачный прямоугольник - «шлейф»
   rect(0, 0, width, height);
   if (mousePressed) {
     PVector target = new PVector(mouseX, mouseY);
@@ -245,7 +245,7 @@ void draw() {
   {
     id: 'permissions',
     title: 'Разрешения',
-    hint: 'Глава 11 — requestPermission/hasPermission и колбэк с boolean.',
+    hint: 'Глава 11 - requestPermission/hasPermission и колбэк с boolean.',
     files: [
       {
         name: 'permissions.pde',
@@ -281,11 +281,11 @@ void initCamera() {
   {
     id: 'motion-scope',
     title: 'MotionScope',
-    hint: 'Главы 18–19 — учебный проект: сенсоры, lifecycle, адаптивный UI, data/config.json.',
+    hint: 'Главы 18-19 - учебный проект: сенсоры, lifecycle, адаптивный UI, data/config.json.',
     files: [
       {
         name: 'MotionScope.pde',
-        content: `// MotionScope.pde — учебный проект для Processing for Android.
+        content: `// MotionScope.pde - учебный проект для Processing for Android.
 String appTitle = "MotionScope";
 float smoothing = 0.14;
 boolean frozen = false;
@@ -318,7 +318,7 @@ void touchStarted() {
       },
       {
         name: 'Sensors.pde',
-        content: `// Sensors.pde — Android Sensor API.
+        content: `// Sensors.pde - Android Sensor API.
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -385,7 +385,7 @@ class AccelerometerListener implements SensorEventListener {
       },
       {
         name: 'Config.pde',
-        content: `// Config.pde — загрузка конфигурации.
+        content: `// Config.pde - загрузка конфигурации.
 void loadAppConfig() {
   try {
     JSONObject config = loadJSONObject("config.json");
@@ -407,7 +407,7 @@ void loadAppConfig() {
       },
       {
         name: 'History.pde',
-        content: `// History.pde — кольцевой буфер показаний.
+        content: `// History.pde - кольцевой буфер показаний.
 final int HISTORY_SIZE = 120;
 float[] history = new float[HISTORY_SIZE];
 int historyHead = 0;
@@ -425,7 +425,7 @@ void pushHistory(float value) {
       },
       {
         name: 'UI.pde',
-        content: `// UI.pde — отрисовка интерфейса.
+        content: `// UI.pde - отрисовка интерфейса.
 float u() {
   // Наша условная единица интерфейса зависит от меньшей стороны экрана.
   return min(width, height) / 100.0;
@@ -523,7 +523,7 @@ void drawHistoryGraph() {
 void drawFooter() {
   fill(135, 145, 160);
   textSize(2.8 * u());
-  String state = frozen ? "PAUSED — tap to resume" : "LIVE — tap to freeze";
+  String state = frozen ? "PAUSED - tap to resume" : "LIVE - tap to freeze";
   textAlign(CENTER, BASELINE);
   text(state, width / 2.0, height - 4 * u());
   textAlign(LEFT, BASELINE);
@@ -543,7 +543,7 @@ void drawFooter() {
   {
     id: 'esp32',
     title: 'Связь с ESP32 по UDP',
-    hint: 'Глава 15 — телефон спрашивает значения у платы и управляет светодиодом.',
+    hint: 'Глава 15 - телефон спрашивает значения у платы и управляет светодиодом.',
     files: [
       {
         name: 'esp32Link.pde',
@@ -577,7 +577,7 @@ void startNetwork() {
   if (netRunning) return;
   netRunning = true;
   generation++;
-  thread("networkLoop");             // вся сеть — в фоновом потоке
+  thread("networkLoop");             // вся сеть - в фоновом потоке
 }
 
 void networkLoop() {
@@ -610,9 +610,9 @@ void networkLoop() {
         }
         lastPacketMs = millis();
       } catch (SocketTimeoutException e) {
-        // данных нет — идём на следующий круг
+        // данных нет - идём на следующий круг
       } catch (NumberFormatException e) {
-        // мусорный пакет — игнорируем
+        // мусорный пакет - игнорируем
       }
     }
   } catch (Exception e) {
@@ -678,7 +678,7 @@ void mouseReleased() {
       {
         name: 'esp32/esp32.ino',
         content: `// Скетч для ESP32 (Arduino IDE).
-// Потенциометр — GPIO34, светодиод — GPIO2.
+// Потенциометр - GPIO34, светодиод - GPIO2.
 #include <WiFi.h>
 #include <WiFiUdp.h>
 
@@ -737,11 +737,11 @@ void loop() {
   {
     id: 'android-studio',
     title: 'PApplet внутри Activity',
-    hint: 'Глава 21.3 — Processing Core как renderer-слой обычного Android-проекта.',
+    hint: 'Глава 21.3 - Processing Core как renderer-слой обычного Android-проекта.',
     files: [
       {
         name: 'Sketch.java',
-        content: `// Sketch.java — sketch как обычный Java-класс в Android Studio.
+        content: `// Sketch.java - sketch как обычный Java-класс в Android Studio.
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
@@ -763,7 +763,7 @@ public class Sketch extends PApplet {
       },
       {
         name: 'MainActivity.java',
-        content: `// MainActivity.java — встраиваем sketch в Activity.
+        content: `// MainActivity.java - встраиваем sketch в Activity.
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;

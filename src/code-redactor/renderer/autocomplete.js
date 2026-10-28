@@ -119,7 +119,7 @@ function update(manual = false) {
   if (OFF.has(lang)) return hide();
   const caret = el.selectionStart;
   const before = el.value.slice(Math.max(0, caret - 80), caret);
-  // После точки — члены объекта (mouse., v., config.), иначе — слова.
+  // После точки - члены объекта (mouse., v., config.), иначе - слова.
   const dotMatch = /\.([A-Za-z_$][\w$]*)?$/.exec(before);
   const wordMatch = /[A-Za-z_$][\w$]*$/.exec(before);
   const isMember = !!dotMatch;

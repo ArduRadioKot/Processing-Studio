@@ -135,7 +135,7 @@ body.is-dragging-tab .split-drop-zone, .split-drop-zone.active { display: flex; 
 .code-editor-wrap { position: relative; flex: 1; min-width: 0; overflow: hidden; }
 
 /* Highlight overlay and the textarea must share every metric.
-   CSS zoom на предке ломает нативный caret Chromium — масштаб только через размер шрифта. */
+   CSS zoom на предке ломает нативный caret Chromium - масштаб только через размер шрифта. */
 .syntax-highlight, #editor, #editor-right, .caret-mirror {
   position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 12px 24px 96px;
   font: var(--editor-font-size, 14px)/var(--editor-line-height, 22px) var(--mono-font); tab-size: var(--editor-tab-size, 4); white-space: pre; word-wrap: normal; overflow-wrap: normal;
