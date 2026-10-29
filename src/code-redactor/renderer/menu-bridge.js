@@ -12,7 +12,7 @@ import { toggleChat } from './chat.js';
 import { toggleDevicePanel, runCurrentSketch, showDevicePanel } from './device-emulator.js';
 import { toggleGlass } from './glass.js';
 import { openToolchainWizard } from './toolchain-wizard.js';
-import { openUpdatesSettings } from './updater.js';
+import { promptForUpdates } from './updater.js';
 import { runPipelineAction } from './pipelines.js';
 
 const openSettings = () => {
@@ -25,7 +25,7 @@ const toggleSplit = () => {
 
 const COMMANDS = {
   settings: openSettings,
-  updates: openUpdatesSettings,
+  updates: () => { promptForUpdates(); },
   'new-file': createNewFile,
   'new-notebook': createNewNotebook,
   open: openFileOrFolder,

@@ -179,9 +179,13 @@
 .updates-banner .updates-banner-go { background: var(--accent-color); color: var(--accent-text); font-weight: 600; }
 .updates-banner .updates-banner-go:hover { background: color-mix(in srgb, var(--accent-color) 86%, #fff); }
 .updates-banner .updates-banner-close { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; }
-.update-found-window { width: min(440px, 100%); height: auto; padding: 28px; gap: 12px; }
+#modal-update-found { z-index: 3000; }
+.update-found-window { width: min(460px, 100%); height: auto; padding: 28px 28px 22px; gap: 8px; }
 .update-found-window > img { width: 52px; height: 52px; }
-.update-found-window h2 { margin: 8px 0 0; font-size: 22px; line-height: 1.2; }
+.update-found-window h2 { margin: 6px 0 0; font-size: 22px; line-height: 1.2; }
 .update-found-window p { margin: 0; color: var(--text-muted); line-height: 1.45; }
-#update-found-notes { max-height: 130px; overflow: auto; white-space: pre-line; }
-.update-found-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+#update-found-version, #update-found-status, .update-found-notes-label { color: var(--text-color); }
+.update-found-notes-label { margin-top: 6px; font-size: 12px; font-weight: 600; }
+#update-found-notes { max-height: 160px; overflow: auto; white-space: pre-line; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--code-bg); }
+.update-found-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.update-found-actions .settings-btn:disabled { opacity: 0.55; }

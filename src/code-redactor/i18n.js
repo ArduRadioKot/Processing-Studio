@@ -715,7 +715,8 @@ for (const [ru, en] of [
   ['Файл обновления скачан не полностью', 'The update file is incomplete'],
   ['Установка доступна в собранном приложении', 'Installation is available in the packaged app'],
   ['Сначала скачайте обновление', 'Download the update first'],
-  ['Файл скачан. Установите его вручную.', 'File downloaded. Install it manually.']
+  ['Файл скачан. Установите его вручную.', 'File downloaded. Install it manually.'],
+  ['Что нового', "What's new"]
 ]) textMap.set(ru, en);
 for (const [ru, en] of [
   ['Стоп', 'Stop'], ['Датчики', 'Sensors'], ['Консоль', 'Console'],
@@ -740,14 +741,71 @@ for (const [ru, en] of [
   ['Показывать касания', 'Show touches'], ['Сохранить скриншот', 'Save screenshot'],
   ['Очистить консоль', 'Clear console'], ['Экран устройства', 'Device screen'],
   ['Питание', 'Power'], ['Кнопка «Назад»', 'Back button'], ['Громкость +', 'Volume up'],
-  ['Громкость −', 'Volume down'], ['Свернуть панель', 'Collapse panel']
-  ,['В файле', 'In file'],
+  ['Громкость −', 'Volume down'], ['Свернуть панель', 'Collapse panel'],
+  ['В файле', 'In file'],
   ['Панель Git работает с любой открытой папкой.', 'The Git panel works with any open folder.'],
   ['Скетч', 'Sketch'], ['Запустить в эмуляторе', 'Run in emulator'],
   ['Панель эмулятора', 'Emulator panel'], ['Инструменты', 'Tools'],
   ['Стек не задан - проверка инструментов недоступна.', 'No stack is set. Tool checks are unavailable.'],
-  ['Открытый файл передаётся как контекст. Другие файлы можно прикрепить кнопкой со скрепкой или из проводника.', 'The open file is sent as context. Attach other files with the paperclip or from the explorer.']
+  ['Открытый файл передаётся как контекст. Другие файлы можно прикрепить кнопкой со скрепкой или из проводника.', 'The open file is sent as context. Attach other files with the paperclip or from the explorer.'],
+  ['Тип проекта', 'Project type'], ['Название приложения', 'App name'], ['Папка проекта', 'Project folder'],
+  ['Adaptive UI - масштабировать любой интерфейс под экран', 'Adaptive UI - scale any interface to the screen'],
+  ['Библиотека AdaptiveUI вписывает скетч из size() в любой телефон: кнопки, текст и касания масштабируются сами.', 'The AdaptiveUI library fits a sketch from size() to any phone: buttons, text and touch scale automatically.'],
+  ['Отмена', 'Cancel'], ['Примеры из книги «Processing для Android»', 'Examples from the Processing for Android book'],
+  ['Пример создаётся в ProcessingStudio/projects и открывается в редакторе.', 'The example is created in ProcessingStudio/projects and opened in the editor.'],
+  ['Один набор для APK и Capacitor: JDK 17, Android SDK 34, Gradle 8.7 и Node 20. Ставится в toolchain этой машины. Системный SDK не переписывается. Xcode - только из App Store.', 'One toolchain for APK and Capacitor: JDK 17, Android SDK 34, Gradle 8.7 and Node 20. Installed locally for this machine. The system SDK is not changed. Xcode is available from the App Store.'],
+  ['Проверяю инструменты…', 'Checking tools...'], ['Для сборки приложений нажмите «Установить всё».', 'To build apps, click Install all.'],
+  ['Удалить выбранное', 'Remove selected'], ['Выбранное', 'Selected'], ['Установить всё', 'Install all'],
+  ['Git API недоступен. Полностью перезапустите приложение.', 'Git is unavailable. Restart the app.'],
+  ['Можно инициализировать репозиторий здесь или работать без git.', 'You can initialize a repository here or work without Git.'],
+  ['Создать репозиторий', 'Initialize repository'], ['Сменить ветку', 'Switch branch'],
+  ['Сообщение коммита (Ctrl+Enter - закоммитить)', 'Commit message (Ctrl+Enter to commit)'],
+  ['Последние коммиты', 'Recent commits'], ['Убрать все', 'Unstage all'], ['Добавить все', 'Stage all'],
+  ['Ничего не подготовлено', 'Nothing staged'], ['Нет изменений', 'No changes'],
+  ['- не репозиторий git', '- not a Git repository'],
+  ['Только Android · Processing2Android', 'Android only · Processing2Android'],
+  ['Экспорт выполнен', 'Export complete'],
+  ['Изменён', 'Modified'], ['Добавлен', 'Added'], ['Удалён', 'Deleted'],
+  ['Переименован', 'Renamed'], ['Новый', 'New'], ['Конфликт', 'Conflict'],
+  ['Отменить изменения', 'Discard changes'], ['Убрать из коммита', 'Unstage'], ['Добавить в коммит', 'Stage']
 ]) textMap.set(ru, en);
+const dynamicTranslations = [
+  [/^Ничего не найдено \(просмотрено файлов: (\d+)\)$/, ([, count]) => `Nothing found (${count} files scanned)`],
+  [/^(\d+\+?) в (\d+) (?:файле|файлах)$/, ([, matches, files]) => `${matches} in ${files} ${Number(files) === 1 ? 'file' : 'files'}`],
+  [/^(\d+) в (.+)$/, ([, count, name]) => `${count} in ${name}`],
+  [/^Заменить все \((\d+)\)$/, ([, count]) => `Replace all (${count})`],
+  [/^Заменено: (\d+) в (\d+) (?:файле|файлах)$/, ([, matches, files]) => `Replaced: ${matches} in ${files} ${Number(files) === 1 ? 'file' : 'files'}`],
+  [/^Подготовлено \((\d+)\)$/, ([, count]) => `Staged (${count})`],
+  [/^Изменения \((\d+)\)$/, ([, count]) => `Changes (${count})`],
+  [/^Закоммитить \((\d+)\)$/, ([, count]) => `Commit (${count})`],
+  [/^(\d+) (год|года|лет|месяц|месяца|месяцев|день|дня|дней|час|часа|часов|минуту|минуты|минут) назад$/, ([, count, unit]) => {
+    const names = { год: 'year', года: 'year', лет: 'year', месяц: 'month', месяца: 'month', месяцев: 'month', день: 'day', дня: 'day', дней: 'day', час: 'hour', часа: 'hour', часов: 'hour', минуту: 'minute', минуты: 'minute', минут: 'minute' };
+    return `${count} ${names[unit]}${Number(count) === 1 ? '' : 's'} ago`;
+  }],
+  [/^Терминал (\d+)$/, ([, count]) => `Terminal ${count}`],
+  [/^Просмотр (.+)$/, ([, name]) => `Preview ${name}`],
+  [/^(.+) - не найден$/, ([, name]) => `${name} - not found`],
+  [/^(.+) · не удалось загрузить изображение$/, ([, name]) => `${name} · could not load image`],
+  [/^Ошибка в (.+), строка (\d+)$/, ([, name, line]) => `Error in ${name}, line ${line}`],
+  [/^Ошибка в строке (\d+)$/, ([, line]) => `Error on line ${line}`],
+  [/^Координаты отправлены: (.+)$/, ([, coordinates]) => `Coordinates sent: ${coordinates}`],
+  [/^Вкладки: (.+)$/, ([, names]) => `Tabs: ${names}`],
+  [/^Запуск: (.+)$/, ([, name]) => `Running: ${name}`],
+  [/^Не удалось создать папку: (.+)$/, ([, error]) => `Could not create folder: ${error}`],
+  [/^Проект создан, но Capacitor не установился: (.+)$/, ([, error]) => `Project created, but Capacitor installation failed: ${error}`],
+  [/^Проект создан, Capacitor(.+) установлен: (.+)$/, ([, version, path]) => `Project created, Capacitor${version} installed: ${path}`],
+  [/^Проект создан: (.+)$/, ([, path]) => `Project created: ${path}`],
+  [/^Android-проект создан: (.+)$/, ([, path]) => `Android project created: ${path}`],
+  [/^Не удалось записать (.+)$/, ([, path]) => `Could not write ${path}`]
+];
+function translateText(value) {
+  if (textMap.has(value)) return textMap.get(value);
+  for (const [pattern, format] of dynamicTranslations) {
+    const match = value.match(pattern);
+    if (match) return format(match);
+  }
+  return value;
+}
 const storageKey = 'processing-studio.language';
 let stored = '';
 try { stored = localStorage.getItem(storageKey) || ''; } catch {}
@@ -757,14 +815,18 @@ function translateNode(node) {
   if (!node || node.parentElement?.closest('script,style,svg,code,pre,textarea,[contenteditable],#editor,#editor-right,.terminal-xterm')) return;
   const original = node.nodeValue;
   const key = original.trim();
-  if (textMap.has(key)) node.nodeValue = original.replace(key, textMap.get(key));
+  const translated = translateText(key);
+  if (translated !== key) node.nodeValue = original.replace(key, translated);
 }
 
 function translateElement(element) {
   if (!element || element.closest?.('script,style,svg,code,pre,textarea,[contenteditable],#editor,#editor-right,.terminal-xterm')) return;
   for (const attribute of ['title', 'placeholder', 'aria-label']) {
     const value = element.getAttribute?.(attribute);
-    if (value && textMap.has(value)) element.setAttribute(attribute, textMap.get(value));
+    if (value) {
+      const translated = translateText(value);
+      if (translated !== value) element.setAttribute(attribute, translated);
+    }
   }
   for (const child of element.childNodes || []) {
     if (child.nodeType === Node.TEXT_NODE) translateNode(child);
@@ -801,4 +863,4 @@ function applyLanguage() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyLanguage, { once: true });
 else applyLanguage();
-window.appI18n = { get language() { return language; }, t: (ru, en) => language === 'en' ? en : ru, lookup: text => language === 'en' ? textMap.get(text) || text : text };
+window.appI18n = { get language() { return language; }, t: (ru, en) => language === 'en' ? en : ru, lookup: text => language === 'en' ? translateText(text) : text };

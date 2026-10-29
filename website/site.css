@@ -77,7 +77,7 @@ p{text-wrap:pretty}
 
 .android-output h3{font-size:22px;letter-spacing:-.035em}
 .site-footer small{font-size:13px}
-.language-switch{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;letter-spacing:.02em}.language-switch button{border:0;padding:6px 2px;background:none;color:var(--muted);cursor:pointer;font-size:inherit;font-weight:inherit}.language-switch button[aria-pressed="true"]{color:var(--ink)}.language-switch button:hover{color:var(--blue)}.language-switch span{color:var(--line)}
+.language-switch{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;letter-spacing:.02em}.language-switch a{padding:6px 2px;color:var(--muted);text-decoration:none}.language-switch a[aria-current="page"]{color:var(--ink)}.language-switch a:hover{color:var(--blue)}.language-switch span{color:var(--line)}
 @media(max-width:640px){.hero-heading{padding-top:82px}.workflow>div,.workflow>div+div{border-top:2px solid var(--line)}.workflow>div:first-child{border-top:0}}
 .editor-index>div{grid-template-columns:1fr;gap:12px}
 .legal-header{min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:20px}
@@ -128,6 +128,10 @@ p{text-wrap:pretty}
 .origin-body h2{font-size:clamp(52px,5.6vw,94px);line-height:.98;letter-spacing:-.075em;font-weight:800}
 .origin-copy p{font-size:clamp(18px,1.45vw,22px);line-height:1.48;max-width:43ch}
 .origin-copy .under-link{margin-top:32px}
+.origin-plugin{margin-top:44px;padding-top:24px;border-top:1px solid currentColor}
+.origin-plugin h3{font-size:clamp(20px,1.8vw,27px);line-height:1.15;letter-spacing:-.035em}
+.origin-plugin p{margin-top:14px;font-size:16px;line-height:1.55}
+.origin-plugin .under-link{margin-top:20px;margin-right:20px;font-size:14px}
 @media(max-width:840px){.origin-body{grid-template-columns:1fr;gap:30px}.origin-copy p{max-width:58ch}}
 @media(max-width:640px){.origin-section{padding-top:30px;padding-bottom:83px}.origin-body{padding-top:51px;gap:27px}.origin-body h2{font-size:clamp(40px,10.5vw,58px)}.origin-copy p{font-size:18px}.origin-copy .under-link{margin-top:25px}}
 

@@ -10,6 +10,8 @@
   <meta property="og:description" content="Пишите на Processing, проверяйте скетч в эмуляторе и экспортируйте Android-проект.">
   <meta property="og:image" content="img/screenshots/ide-editor-device.png">
   <title>Processing Studio: IDE для мобильной разработки</title>
+  <link rel="alternate" hreflang="ru" href="index.html">
+  <link rel="alternate" hreflang="en" href="en/index.html">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="img/icon.png" type="image/png">
   <link rel="stylesheet" href="site.css">
@@ -38,7 +40,7 @@
       <a href="#editor">Редактор</a>
     </nav>
     <div class="header-actions">
-      <div class="language-switch" role="group" aria-label="Язык сайта"><button type="button" data-site-lang="ru" lang="ru">RU</button><span aria-hidden="true">/</span><button type="button" data-site-lang="en" lang="en">EN</button></div>
+      <div class="language-switch" role="group" aria-label="Язык сайта"><a href="index.html" data-site-lang="ru" lang="ru" hreflang="ru" aria-current="page">RU</a><span aria-hidden="true">/</span><a href="en/index.html" data-site-lang="en" lang="en" hreflang="en">EN</a></div>
       <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false"><svg class="icon theme-icon-moon" aria-hidden="true" focusable="false"><use href="#icon-moon"/></svg><svg class="icon theme-icon-sun" aria-hidden="true" focusable="false"><use href="#icon-sun"/></svg><span class="theme-toggle-label">Тёмная тема</span></button>
       <a class="header-download" href="#download">Скачать <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></span></a>
       <button class="menu-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Открыть меню">Меню <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-plus"/></svg></button>
@@ -99,7 +101,16 @@
     <section class="origin-section page-grid" id="origin" aria-labelledby="origin-title">
       <div class="origin-body">
         <h2 id="origin-title">Знакомый<br><em>FrogeeCodeIDE.</em></h2>
-        <div class="origin-copy"><p>Processing Studio основана на существующем редакторе FrogeeCodeIDE. Если вы уже работали в нём, здесь всё выглядит знакомо: файлы, вкладки, поиск, терминалы и настройки. Рядом с ними появились инструменты для мобильной разработки на Processing: PDE-скетчи, эмулятор телефона и экспорт Android-проекта.</p><a class="under-link" href="https://arduradiokot.github.io/ForgeeCodeIDE/" target="_blank" rel="noopener noreferrer">Посмотреть FrogeeCodeIDE <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a></div>
+        <div class="origin-copy">
+          <p>Processing Studio основана на существующем редакторе FrogeeCodeIDE. Если вы уже работали в нём, здесь всё выглядит знакомо: файлы, вкладки, поиск, терминалы и настройки. Рядом с ними появились инструменты для мобильной разработки на Processing: PDE-скетчи, эмулятор телефона и экспорт Android-проекта.</p>
+          <a class="under-link" href="https://arduradiokot.github.io/ForgeeCodeIDE/" target="_blank" rel="noopener noreferrer">Посмотреть FrogeeCodeIDE <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a>
+          <div class="origin-plugin">
+            <h3>Плагин Processing Mobile для FrogeeCodeIDE</h3>
+            <p>Хотите работать со скетчами в знакомом FrogeeCodeIDE? Плагин Processing Mobile добавляет запуск PDE в эмуляторе, экспорт Android-проекта и сборку APK. Установите его через раздел «Расширения» в FrogeeCodeIDE.</p>
+            <a class="under-link" href="https://arduradiokot.github.io/ForgeeCodeIDE/extensions.html#catalog" target="_blank" rel="noopener noreferrer">Открыть каталог расширений <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a>
+            <a class="under-link" href="https://github.com/ArduRadioKot/ForgeeCodeIDE/tree/main/extensions/processing-mobile" target="_blank" rel="noopener noreferrer">Инструкция к плагину <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-out"/></svg></a>
+          </div>
+        </div>
       </div>
     </section>
 

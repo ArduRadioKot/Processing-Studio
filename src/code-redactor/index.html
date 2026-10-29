@@ -399,19 +399,6 @@
     <button type="button" class="updates-banner-details">Подробнее</button>
     <button type="button" class="updates-banner-close" aria-label="Скрыть уведомление об обновлении"></button>
   </div>
-  <div class="modal-overlay" id="modal-update-found" role="dialog" aria-modal="true" aria-labelledby="update-found-title" style="display:none">
-    <div class="modal-window update-found-window">
-      <img src="images/icon.png" width="52" height="52" alt="">
-      <h2 id="update-found-title">Доступно обновление</h2>
-      <p id="update-found-version"></p>
-      <p id="update-found-notes" hidden></p>
-      <div class="update-found-actions">
-        <button type="button" class="settings-btn ghost" id="update-found-later">Позже</button>
-        <button type="button" class="settings-btn ghost" id="update-found-details">Подробнее</button>
-        <button type="button" class="settings-btn" id="update-found-install">Обновить</button>
-      </div>
-    </div>
-  </div>
   <div id="status-bar" class="status-bar app-chrome">
     <div class="status-left">
       <span id="status-file">Welcome</span>
@@ -1022,6 +1009,23 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-update-found" role="dialog" aria-modal="true" aria-labelledby="update-found-title" style="display:none">
+    <div class="modal-window update-found-window" data-glass="dialog">
+      <img src="images/icon.png" width="52" height="52" alt="">
+      <h2 id="update-found-title">Доступно обновление</h2>
+      <p id="update-found-version"></p>
+      <p id="update-found-summary"></p>
+      <p class="update-found-notes-label" id="update-found-notes-label" hidden>Что нового</p>
+      <p id="update-found-notes" hidden></p>
+      <p id="update-found-status" hidden></p>
+      <div class="update-found-actions">
+        <button type="button" class="settings-btn ghost" id="update-found-later">Позже</button>
+        <button type="button" class="settings-btn ghost" id="update-found-details">Подробнее</button>
+        <button type="button" class="settings-btn" id="update-found-install">Обновить</button>
+      </div>
+    </div>
   </div>
 
   <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>

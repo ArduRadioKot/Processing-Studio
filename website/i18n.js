@@ -1,3 +1,4 @@
+// Russian HTML is the source. Rebuild website/en/ with node website/scripts/build-en.mjs after edits.
 const translations = {
   'Processing Studio: IDE для мобильной разработки': 'Processing Studio: IDE for mobile development',
   'Processing Studio: написать приложение проще, чем кажется': 'Processing Studio: making an app is easier than it seems',
@@ -78,6 +79,10 @@ const translations = {
   'Знакомый': 'Familiar',
   'Processing Studio основана на существующем редакторе FrogeeCodeIDE. Если вы уже работали в нём, здесь всё выглядит знакомо: файлы, вкладки, поиск, терминалы и настройки. Рядом с ними появились инструменты для мобильной разработки на Processing: PDE-скетчи, эмулятор телефона и экспорт Android-проекта.': 'Processing Studio is based on the existing FrogeeCodeIDE editor. If you have used it before, the files, tabs, search, terminals and settings will feel familiar. Alongside them are tools for mobile development with Processing: PDE sketches, a phone emulator and Android project export.',
   'Посмотреть FrogeeCodeIDE': 'Explore FrogeeCodeIDE',
+  'Плагин Processing Mobile для FrogeeCodeIDE': 'Processing Mobile plugin for FrogeeCodeIDE',
+  'Хотите работать со скетчами в знакомом FrogeeCodeIDE? Плагин Processing Mobile добавляет запуск PDE в эмуляторе, экспорт Android-проекта и сборку APK. Установите его через раздел «Расширения» в FrogeeCodeIDE.': 'Want to work with sketches in the familiar FrogeeCodeIDE? The Processing Mobile plugin adds PDE runs in an emulator, Android project export and APK builds. Install it from the Extensions section in FrogeeCodeIDE.',
+  'Открыть каталог расширений': 'Browse extensions',
+  'Инструкция к плагину': 'Plugin instructions',
   'Открыть снимок галереи примеров в полном размере': 'Open the full-size examples gallery screenshot',
   'Галерея учебных примеров Processing Studio: первый скетч, датчики, масштабирование, разрешения, ESP32 и PApplet': 'Processing Studio examples gallery: first sketch, sensors, zooming, permissions, ESP32 and PApplet',
   'Встроенная галерея учебных скетчей': 'Built-in gallery of example sketches',
@@ -138,44 +143,29 @@ const translations = {
   'Библиотеки приложения': 'Application libraries',
   'Основные зависимости, используемые в текущем проекте:': 'Main dependencies used in the current project:',
   'xterm.js и addon-fit: MIT': 'xterm.js and addon-fit: MIT',
-  'Полные уведомления и лицензии сторонних пакетов входят в их поставку. Зависимости и версии указаны в': 'Full third-party notices and licenses are included with those packages. Dependencies and versions are listed in the project',
-  'проекта.': '.',
+  'Полные уведомления и лицензии сторонних пакетов входят в их поставку. Зависимости и версии указаны в': "Full third-party notices and licenses are included with those packages. Dependencies and versions are listed in the project's",
+  'проекта.': 'file.',
   'Логотип и снимки экрана': 'Logo and screenshots',
   'Логотип и снимки интерфейса используются как материалы Processing Studio. Отдельные условия их повторного использования вне проекта не опубликованы.': 'The logo and interface screenshots are Processing Studio materials. Separate terms for use outside the project have not been published.'
 };
 
 const urlLanguage = new URLSearchParams(location.search).get('lang');
-let savedLanguage = '';
-try { savedLanguage = localStorage.getItem('processing-studio-language') || ''; } catch {}
-const language = ['ru', 'en'].includes(urlLanguage) ? urlLanguage : ['ru', 'en'].includes(savedLanguage) ? savedLanguage : navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+const pageName = location.pathname.endsWith('/licenses.html') ? 'licenses.html' : 'index.html';
+const englishPage = /\/en\/(?:index\.html|licenses\.html)?$/.test(location.pathname);
+const language = englishPage ? 'en' : 'ru';
 document.documentElement.lang = language;
-document.querySelectorAll('[data-site-lang]').forEach(button => {
-  button.setAttribute('aria-pressed', String(button.dataset.siteLang === language));
-  button.addEventListener('click', () => {
-    const next = button.dataset.siteLang;
-    try { localStorage.setItem('processing-studio-language', next); } catch {}
-    const url = new URL(location.href);
-    url.searchParams.set('lang', next);
-    location.href = url.href;
+function pageFor(nextLanguage) {
+  const target = new URL(nextLanguage === 'en' ? (englishPage ? pageName : `en/${pageName}`) : (englishPage ? `../${pageName}` : pageName), location.href);
+  target.hash = location.hash;
+  return target.href;
+}
+if (['ru', 'en'].includes(urlLanguage) && urlLanguage !== language) location.replace(pageFor(urlLanguage));
+document.querySelectorAll('a[data-site-lang]').forEach(link => {
+  link.addEventListener('click', event => {
+    const next = link.dataset.siteLang;
+    if (next !== language) {
+      event.preventDefault();
+      location.href = pageFor(next);
+    }
   });
 });
-
-if (language === 'en') {
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const nodes = [];
-  while (walker.nextNode()) nodes.push(walker.currentNode);
-  for (const node of nodes) {
-    if (node.parentElement?.closest('svg,script,style,code')) continue;
-    const original = node.nodeValue;
-    const trimmed = original.trim();
-    if (Object.hasOwn(translations, trimmed)) node.nodeValue = original.replace(trimmed, translations[trimmed]);
-  }
-  for (const element of document.querySelectorAll('[title],[aria-label],[alt],meta[content]')) {
-    for (const attr of ['title', 'aria-label', 'alt', 'content']) {
-      const value = element.getAttribute(attr);
-      if (value && Object.hasOwn(translations, value)) element.setAttribute(attr, translations[value]);
-    }
-  }
-  if (Object.hasOwn(translations, document.title)) document.title = translations[document.title];
-  document.querySelectorAll('a[href="index.html"],a[href="licenses.html"]').forEach(link => { link.href += '?lang=en'; });
-}

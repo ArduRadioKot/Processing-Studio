@@ -1,6 +1,6 @@
 {
   "name": "processing-studio",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "IDE for Processing: editor, device emulator and Android project export",
   "main": "main.js",
   "scripts": {
