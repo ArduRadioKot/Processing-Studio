@@ -1,60 +1,64 @@
 # Processing Studio
 
-Лёгкая IDE на Electron для Processing: редактор кода, эмулятор телефона и сборка
-Android-проектов. Скетч `.pde` запускается прямо в IDE, а из него можно получить
-готовый Gradle-проект для Android — без Processing for Android.
+A lightweight Electron IDE for Processing: a code editor, phone emulator, and Android
+project builder. `.pde` sketches run directly in the IDE, and can be exported as
+ready-to-build Gradle projects for Android — without Processing for Android.
 
 ![Processing Studio](website/img/hero.jpg)
 
-## Возможности
+## Features
 
-**Примеры**
-- Готовые скетчи из книги «Processing для Android»: первая программа, шарик-уровень на
-  акселерометре, масштаб щипком, кнопка `TouchButton`, след на `PVector`, запрос разрешений,
-  проект MotionScope, связь с ESP32 по UDP, `PApplet` внутри Activity.
-- Открываются из приветствия («Примеры…») или из палитры команд; каждый пример создаётся
-  в `projects/` и сразу открывается в редакторе.
+**Examples**
+- Ready-made sketches from the book “Processing for Android”: a first program, an
+  accelerometer level bubble, pinch-to-zoom, the `TouchButton`, a trace on a `PVector`,
+  permission requests, the MotionScope project, UDP communication with an ESP32, and
+  `PApplet` inside an Activity.
+- Open them from the welcome screen (“Examples…”) or the command palette. Each example
+  is created in `projects/` and immediately opened in the editor.
 
-**Эмулятор телефона**
-- Панель справа: экран устройства, модели (iPhone, Pixel, Galaxy, iPad, свой размер), портрет/альбом.
-- Собственный рантайм Processing: canvas, фигуры, текст, цвета, матрицы, `PVector`, `ArrayList`.
-- Несколько вкладок `.pde` склеиваются в один скетч — как в preprocessor Processing.
-- Ввод как на телефоне: мультитач, мышь, клавиатура, индикатор касаний.
-- Датчики: акселерометр, гироскоп, компас, наклон, тряска, ориентация, местоположение.
-- Android-возможности прямо в эмуляторе: запрос разрешений (диалог на экране устройства),
-  `SharedPreferences`, `getActivity()`, package приложения.
-- Ошибки скетча показываются с номером строки исходного файла.
+**Phone emulator**
+- A right-hand panel with the device screen, device models (iPhone, Pixel, Galaxy, iPad,
+  and custom size), and portrait/landscape orientation.
+- A custom Processing runtime: canvas, shapes, text, colors, matrices, `PVector`, and
+  `ArrayList`.
+- Multiple `.pde` tabs are combined into a single sketch, just like the Processing
+  preprocessor.
+- Phone-like input: multitouch, mouse, keyboard, and a touch indicator.
+- Sensors: accelerometer, gyroscope, compass, tilt, shake, orientation, and location.
+- Android features directly in the emulator: permission requests (shown as a dialog on the
+  device screen), `SharedPreferences`, `getActivity()`, and the app package name.
+- Sketch errors are shown with the source file's line number.
 
-**Android-проекты**
-- Мастер проекта: package name, название, min/target SDK, ориентация, разрешения.
-- Экспорт в Gradle-проект: `settings.gradle`, `app/build.gradle`, `AndroidManifest.xml`,
-  `MainActivity`, ресурсы и иконка.
-- В проект попадает собственный Java-рантайм `PApplet` (рисование на `Canvas`, касания,
-  датчики, разрешения) — Processing for Android не нужен.
-- Готовый проект открывается в Android Studio и собирается обычным Gradle.
+**Android projects**
+- Project wizard: package name, app name, min/target SDK, orientation, and permissions.
+- Export to a Gradle project: `settings.gradle`, `app/build.gradle`,
+  `AndroidManifest.xml`, `MainActivity`, resources, and an icon.
+- The project includes its own Java `PApplet` runtime (drawing on `Canvas`, touch input,
+  sensors, and permissions), so Processing for Android is not required.
+- The generated project opens in Android Studio and builds with standard Gradle.
 
-Подробный материал по Processing for Android (модель сборки, toolchain, ADB/Gradle, сенсоры,
-permissions, lifecycle, отладка, перенос desktop-скетчей, Arduino/ESP32, production) —
-в [docs/processing-for-android.md](docs/processing-for-android.md).
+Detailed information about Processing for Android (build model, toolchain, ADB/Gradle,
+sensors, permissions, lifecycle, debugging, porting desktop sketches, Arduino/ESP32, and
+production) is available in [docs/processing-for-android.md](docs/processing-for-android.md).
 
-**Код**
-- Подсветка синтаксиса, диагностика, поиск и замена, поиск по проекту.
-- Автодополнение: слова Processing и Android Mode, члены объектов после точки
-  (`mouse.`, `config.`), слова из открытых файлов. Tab — принять, стрелки — выбор,
-  `Ctrl+Space` — вручную.
-- Jupyter-ноутбуки с автопоиском виртуальных окружений и выбором ядра.
-- Скрипты `package.json`, несколько терминалов.
-- Проводник с перетаскиванием файлов между папками, Git, история изменений.
+**Code**
+- Syntax highlighting, diagnostics, find and replace, and project-wide search.
+- Autocomplete: Processing and Android Mode words, object members after a dot
+  (`mouse.`, `config.`), and words from open files. Press Tab to accept, use the arrow
+  keys to select, or press `Ctrl+Space` manually.
+- Jupyter notebooks with automatic virtual environment discovery and kernel selection.
+- `package.json` scripts and multiple terminals.
+- A file explorer with drag-and-drop between folders, Git, and change history.
 
-**Интерфейс**
-- Тёмная тема в духе Android Studio: плоские панели, тонкие разделители, синий акцент.
-- Светлая тема, настройки внешнего вида и шрифтов.
-- Стекло в двух материалах: тонкое и прозрачное.
-- Несколько окон, меню Dock, восстановление вкладок.
+**Interface**
+- A dark Android Studio-inspired theme: flat panels, thin dividers, and a blue accent.
+- A light theme, appearance settings, and font settings.
+- Glass in two materials: thin and transparent.
+- Multiple windows, a Dock menu, and tab restoration.
 
-## Запуск
+## Running
 
-Нужен Node.js 18 или новее.
+Node.js 18 or newer is required.
 
 ```bash
 cd src/code-redactor
@@ -62,65 +66,66 @@ npm install
 npm start
 ```
 
-## Сборка
+## Building
 
 ```bash
 npm run build:mac     # .dmg
-npm run build:win     # установщик Windows
+npm run build:win     # Windows installer
 npm run build:linux   # AppImage / deb
 ```
 
-Результат появится в `src/code-redactor/dist`.
+The result will be placed in `src/code-redactor/dist`.
 
-## Рабочая папка
+## Working directory
 
-Приложение создаёт в «Документах» свою папку:
+The application creates its own folder in `Documents`:
 
 ```
 ~/Documents/ProcessingStudio/
-├── config/     настройки приложения
-├── projects/   проекты — по папке на проект
+├── config/     application settings
+├── projects/   projects — one folder per project
 │   └── MotionScope/
 │       ├── sketch.pde
 │       └── processing-studio.json
-└── themes/     пользовательские темы
+└── themes/     custom themes
 ```
 
-Проект создаётся мастером «Новый Android-проект»: папка с именем проекта появляется
-в `projects/`, а следом открывается в редакторе. Папку проектов можно открыть из приветствия
-(«Папка проектов…») или из палитры команд.
+Create a project with the “New Android Project” wizard: a folder named after the project
+appears in `projects/` and is then opened in the editor. Open the projects folder from the
+welcome screen (“Projects Folder…”) or the command palette.
 
-Свои темы кладутся в `themes/`, формат описан в
+Place custom themes in `themes/`; the format is described in
 [src/code-redactor/themes/README.md](src/code-redactor/themes/README.md).
 
-## Структура
+## Structure
 
 ```
 src/code-redactor/
-  main.js, preload.js   процесс Electron и мост IPC
-  lib/                  файлы, терминал, ИИ, окружения Python
-  scripts/make-icon.mjs  генератор иконки приложения
-  renderer/             интерфейс (ES-модули)
-    device-runtime.js     рантайм Processing для эмулятора
-    device-transpile.js   перевод .pde в JavaScript
-    device-emulator.js    панель устройства
-    processing-api.js     словарь API для автодополнения
-    examples.js           примеры из книги
-    examples-ui.js        галерея примеров
-    android-project.js    модель проекта и экспорт в Android
-    android-runtime.js    Java-рантайм PApplet для Android-проекта
-    android-ui.js         мастер проекта и настройки приложения
-  styles/               стили
-  themes/               темы
-website/                сайт проекта
+  main.js, preload.js   Electron process and IPC bridge
+  lib/                  files, terminal, AI, and Python environments
+  scripts/make-icon.mjs  application icon generator
+  renderer/             interface (ES modules)
+    device-runtime.js     Processing runtime for the emulator
+    device-transpile.js   .pde-to-JavaScript transpiler
+    device-emulator.js    device panel
+    processing-api.js     API dictionary for autocomplete
+    examples.js           examples from the book
+    examples-ui.js        examples gallery
+    android-project.js    project model and Android export
+    android-runtime.js    Java PApplet runtime for Android projects
+    android-ui.js         project wizard and app settings
+  styles/               styles
+  themes/               themes
+website/                project website
 ```
 
-## Платформы
+## Platforms
 
-macOS проверена полностью. Windows и Linux собираются, но размытие окна там заменено непрозрачной темой.
+macOS has been fully tested. Windows and Linux builds are supported, but window
+transparency is replaced with an opaque theme on those platforms.
 
-## Лицензия
+## License
 
-GPL 2.0 — полный текст в файле [LICENSE](LICENSE).
+GPL 2.0 — see the full text in [LICENSE](LICENSE).
 
-Автор: Frogeesoft.
+Author: Frogeesoft.
